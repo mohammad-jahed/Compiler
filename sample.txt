@@ -1,3 +1,0 @@
-page p {
-in:email(n@gmail.com);
-}

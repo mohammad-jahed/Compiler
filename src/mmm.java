@@ -21,7 +21,7 @@ public class mmm {
             System.out.println("5)Switch " + "6)Show " + "7)Event " + "8)Hide " + "9)If" + "10)Model " + "11)Event");
             System.out.println("12)Full " + "13)Exit");
 
-            String source = "sample.txt";
+            String source = "sample1.txt";
 
             CharStream cs = fromFileName(source);
             Lexerp lexer = new Lexerp(cs);

@@ -101,6 +101,24 @@ public interface ParserpVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBodyarr(Parserp.BodyarrContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link Parserp#bodyarr1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBodyarr1(Parserp.Bodyarr1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parserp#bodyarr2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBodyarr2(Parserp.Bodyarr2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parserp#bodyarr3}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBodyarr3(Parserp.Bodyarr3Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link Parserp#varequal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -137,11 +155,35 @@ public interface ParserpVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBodyfor(Parserp.BodyforContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link Parserp#bodyforfirstvar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBodyforfirstvar(Parserp.BodyforfirstvarContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parserp#bodyforsecondvar}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBodyforsecondvar(Parserp.BodyforsecondvarContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link Parserp#bodyforeach}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBodyforeach(Parserp.BodyforeachContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parserp#bodyforeachFirstArg}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBodyforeachFirstArg(Parserp.BodyforeachFirstArgContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parserp#bodyforeachSecondArg}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBodyforeachSecondArg(Parserp.BodyforeachSecondArgContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Parserp#bodyifc}.
 	 * @param ctx the parse tree
@@ -167,6 +209,24 @@ public interface ParserpVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGoto(Parserp.GotoContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link Parserp#gotobody1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGotobody1(Parserp.Gotobody1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parserp#gotobody2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGotobody2(Parserp.Gotobody2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parserp#gotobody3}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGotobody3(Parserp.Gotobody3Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link Parserp#ifc}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -184,6 +244,18 @@ public interface ParserpVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIf(Parserp.IfContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parserp#ifbody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfbody(Parserp.IfbodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parserp#elsebody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElsebody(Parserp.ElsebodyContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Parserp#ifp}.
 	 * @param ctx the parse tree

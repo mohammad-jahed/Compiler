@@ -2,20 +2,34 @@ package Ast.nodes;
 
 public class Link extends BodyPage{
 
-    public String getLink() {
-        return link;
+
+
+    private String link1;
+    private String openBracket;
+    private String tag;
+    private String closeBracket;
+    private String semicolon;
+    private String arrow;
+    private String openBracketR;
+    private String tagR;
+    private String comma;
+    private String tagRR;
+    private String closeBracketR;
+
+    public String getLink1() {
+        return link1;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setLink1(String link1) {
+        this.link1 = link1;
     }
 
-
+    @Override
     public String getOpenBracket() {
         return openBracket;
     }
 
-
+    @Override
     public void setOpenBracket(String openBracket) {
         this.openBracket = openBracket;
     }
@@ -28,12 +42,12 @@ public class Link extends BodyPage{
         this.tag = tag;
     }
 
-
+    @Override
     public String getCloseBracket() {
         return closeBracket;
     }
 
-
+    @Override
     public void setCloseBracket(String closeBracket) {
         this.closeBracket = closeBracket;
     }
@@ -93,17 +107,4 @@ public class Link extends BodyPage{
     public void setCloseBracketR(String closeBracketR) {
         this.closeBracketR = closeBracketR;
     }
-
-    private String link;
-    private String openBracket;
-    private String tag;
-    private String closeBracket;
-    private String semicolon;
-    private String arrow;
-    private String openBracketR;
-    private String tagR;
-    private String comma;
-    private String tagRR;
-    private String closeBracketR;
-
 }

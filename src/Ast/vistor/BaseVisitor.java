@@ -17,14 +17,116 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseVisitor extends ParserpBaseVisitor {
+
+
+    @Override
+    public BodyArr1 visitBodyarr1(Parserp.Bodyarr1Context ctx) {
+        System.out.println("visit bodyarray1");
+        BodyArr1 bodyArr1 = new BodyArr1();
+        bodyArr1.setStringArr1(ctx.STRINGARR1().toString());
+        System.out.println(bodyArr1.getStringArr1());
+        if(ctx.COMMAARR()!=null){
+            bodyArr1.setComma(ctx.COMMAARR().toString());
+            System.out.println(bodyArr1.getComma());
+            bodyArr1.setStringArr2(ctx.STRINGARR2().toString());
+            System.out.println(bodyArr1.getStringArr2());
+        }
+        return bodyArr1;
+    }
+
+    @Override
+    public BodyArr2 visitBodyarr2(Parserp.Bodyarr2Context ctx) {
+        System.out.println("visit bodyarray2");
+        BodyArr2 bodyArr2 = new BodyArr2();
+        bodyArr2.setNumArr(ctx.NUMarr().toString());
+        System.out.println(bodyArr2.getNumArr());
+        if(ctx.COMMAARR()!=null){
+
+            bodyArr2.setComma(ctx.COMMAARR().toString());
+            System.out.println(bodyArr2.getComma());
+            bodyArr2.setNumArr1(ctx.NUMarr1().toString());
+            System.out.println(bodyArr2.getNumArr1());
+        }
+        return bodyArr2;
+    }
+
+    @Override
+    public BodyArr3 visitBodyarr3(Parserp.Bodyarr3Context ctx) {
+        System.out.println("visit bodyarray3");
+        BodyArr3 bodyArr3 = new BodyArr3();
+        bodyArr3.setVarArr(ctx.VARARR().toString());
+        System.out.println(bodyArr3.getVarArr());
+        bodyArr3.setArrN(ctx.ARRN().toString());
+        System.out.println(bodyArr3.getArrN());
+        bodyArr3.setComma(ctx.COMMAARR().toString());
+        System.out.println(bodyArr3.getComma());
+
+        if(ctx.VARARR1()!=null){
+            bodyArr3.setArrN1(ctx.ARRN1().toString());
+            System.out.println(bodyArr3.getArrN1());
+        }
+        return bodyArr3;
+    }
+
+    @Override
+    public Object visitVarequal(Parserp.VarequalContext ctx) {
+        return super.visitVarequal(ctx);
+    }
+
+    @Override
+    public Object visitForeach(Parserp.ForeachContext ctx) {
+        return super.visitForeach(ctx);
+    }
+
+    @Override
+    public Object visitForeachp(Parserp.ForeachpContext ctx) {
+        return super.visitForeachp(ctx);
+    }
+
+    @Override
+    public Object visitFor(Parserp.ForContext ctx) {
+        return super.visitFor(ctx);
+    }
+
+    @Override
+    public Object visitForp(Parserp.ForpContext ctx) {
+        return super.visitForp(ctx);
+    }
+
+    @Override
+    public Object visitIfcv(Parserp.IfcvContext ctx) {
+        return super.visitIfcv(ctx);
+    }
+
+    @Override
+    public Object visitIfp(Parserp.IfpContext ctx) {
+        return super.visitIfp(ctx);
+    }
+
+    @Override
+    public Object visitSwitchp(Parserp.SwitchpContext ctx) {
+        return super.visitSwitchp(ctx);
+    }
+
     @Override
     public Page visitPages(Parserp.PagesContext ctx) {
+        System.out.println("visit page");
         List<DefinitionPage> definitionPages = new ArrayList<>();
         List<DefinitionController> definitionControllers = new ArrayList<>();
         Page page = new Page();
-        for (int i = 0; i < ctx.def_page().size(); i++) {
-            definitionPages.add(visitDef_page(ctx.def_page(i)));
+        if (ctx.def_page()!=null){
+            for (int i = 0; i < ctx.def_page().size(); i++) {
+                definitionPages.add(visitDef_page(ctx.def_page(i)));
         }
+
+        }
+         if (ctx.def_controller()!=null){
+            for (int i = 0; i < ctx.def_controller().size(); i++) {
+                definitionControllers.add(visitDef_controller(ctx.def_controller(i)));
+            }
+        }
+
+
         page.setDefinitionPages(definitionPages);
         return page;
     }
@@ -32,28 +134,34 @@ public class BaseVisitor extends ParserpBaseVisitor {
     @Override
     public Link visitLink(Parserp.LinkContext ctx) {
         Link link = new Link();
-        link.setLink(ctx.LINK().toString());
-        System.out.println(link.getLink());
+        link.setLink1(ctx.LINK().toString());
+        System.out.println(link.getLink1());
+        write(link.getLink1());
         link.setOpenBracket(ctx.OPENC().toString());
         System.out.println(link.getOpenBracket());
+        write(link.getOpenBracket());
         link.setTag(ctx.TAG_NAME().toString());
         System.out.println(link.getTag());
+        write(link.getTagName());
         link.setCloseBracket(ctx.CLOSEC().toString());
-
+        System.out.println(link.getCloseBracket());
+        write(link.getCloseBracket());
         if (ctx.TO()!=null){
             link.setArrow(ctx.TO().toString());
             System.out.println(link.getArrow());
-            link.setOpenBracketR(ctx.OPENC().toString());
+            link.setOpenBracketR(ctx.OPENC1().toString());
             System.out.println(link.getOpenBracketR());
-            if (ctx.TAG_NAME()!=null){
-                link.setTagR(ctx.TAG_NAME().toString());
+            if (ctx.TAG_NAME1()!=null){
+                link.setTagR(ctx.TAG_NAME1().toString());
                 System.out.println(link.getTagR());
-                if (ctx.COMMA()!=null){
-                    link.setComma(ctx.COMMA().toString());
+                link.setCloseBracketR(ctx.CLOSEC1().toString());
+                System.out.println(link.getCloseBracketR());
+                if (ctx.COMMA1()!=null){
+                    link.setComma(ctx.COMMA1().toString());
                     System.out.println(link.getComma());
-                    link.setTagRR(ctx.TAG_NAME().toString());
+                    link.setTagRR(ctx.TAG_NAME2().toString());
                     System.out.println(link.getTagRR());
-                    link.setCloseBracketR(ctx.CLOSEC().toString());
+                    link.setCloseBracketR(ctx.CLOSEC1().toString());
                     System.out.println(link.getCloseBracketR());
                 }
             }
@@ -61,22 +169,95 @@ public class BaseVisitor extends ParserpBaseVisitor {
         link.setSemicolon(ctx.CLOSE().toString());
         System.out.println(link.getSemicolon());
 
-        return (Link) super.visitLink(ctx);
+        return link;
     }
 
     @Override
     public Data visitData(Parserp.DataContext ctx) {
-        return (Data) super.visitData(ctx);
+
+        Data data = new Data();
+        data.setData1(ctx.DATA().toString());
+        System.out.println(data.getData1());
+        write(data.getData1());
+        data.setOpenBracket(ctx.OPENC().toString());
+        System.out.println(data.getOpenBracket());
+        write(data.getOpenBracket());
+        data.setTag(ctx.TAG_NAME().toString());
+        System.out.println(data.getTag());
+        data.setCloseBracket(ctx.CLOSEC().toString());
+
+        if (ctx.TO()!=null){
+            data.setArrow(ctx.TO().toString());
+            System.out.println(data.getArrow());
+            data.setOpenBracketR(ctx.OPENC1().toString());
+            System.out.println(data.getOpenBracketR());
+            if (ctx.TAG_NAME1()!=null){
+                data.setTagR(ctx.TAG_NAME1().toString());
+                System.out.println(data.getTagR());
+                data.setCloseBracketR(ctx.CLOSEC1().toString());
+                System.out.println(data.getCloseBracketR());
+                if (ctx.COMMA1()!=null){
+                    data.setComma(ctx.COMMA1().toString());
+                    System.out.println(data.getComma());
+                    data.setTagRR(ctx.TAG_NAME2().toString());
+                    System.out.println(data.getTagRR());
+                    data.setCloseBracketR(ctx.CLOSEC1().toString());
+                    System.out.println(data.getCloseBracketR());
+                }
+            }
+        }
+        data.setSemicolon(ctx.CLOSE().toString());
+        System.out.println(data.getSemicolon());
+        return data;
     }
 
     @Override
-    public Object visitBody_controller(Parserp.Body_controllerContext ctx) {
-        return super.visitBody_controller(ctx);
+    public BodyController visitBody_controller(Parserp.Body_controllerContext ctx) {
+        System.out.println("visit bodaycontroller");
+        BodyController bodyController = new BodyController();
+        if(ctx.arr()!=null){
+            bodyController.setArr(visitArr(ctx.arr()));
+            bodyController.setSemiclilon(ctx.CLOSE().toString());
+            System.out.println(bodyController.getSemiclilon());
+        }
+
+
+
+        return bodyController;
     }
 
     @Override
-    public Object visitDef_controller(Parserp.Def_controllerContext ctx) {
-        return super.visitDef_controller(ctx);
+    public DefinitionController visitDef_controller(Parserp.Def_controllerContext ctx) {
+        System.out.println("visit def controller");
+        DefinitionController definitionController = new DefinitionController();
+        List<BodyController> bodyControllers = new ArrayList<>();
+        //BodyController bodyController = new BodyController() ;
+        definitionController.setController(ctx.CONTROLLER().toString());
+        System.out.println(definitionController.getController());
+        definitionController.setTagName(ctx.TAG_NAME().toString());
+        System.out.println(definitionController.getTagName());
+        definitionController.setControls(ctx.CONTROLS().toString());
+        System.out.println(definitionController.getControls());
+        definitionController.setTagName2(ctx.TAG_NAME4().toString());
+        System.out.println(definitionController.getTagName2());
+        if(ctx.COMMA4()!=null){
+            definitionController.setComma(ctx.COMMA4().toString());
+            System.out.println(definitionController.getComma());
+            definitionController.setTagName3(ctx.TAG_NAME5().toString());
+            System.out.println(definitionController.getTagName3());
+        }
+        definitionController.setOpenBracket(ctx.OPENBRACKET4().toString());
+        System.out.println(definitionController.getOpenBracket());
+        if (ctx.body_controller()!=null){
+            for (int i=0;i<ctx.body_controller().size();i++)
+                bodyControllers.add(visitBody_controller(ctx.body_controller(i)));
+
+           definitionController.setBodyControllers(bodyControllers);
+        }
+
+        definitionController.setCloseBracket(ctx.CLOSEBRACKET().toString());
+        System.out.println(definitionController.getCloseBracket());
+        return definitionController;
     }
 
     @Override
@@ -85,6 +266,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         DefinitionPage definitionPage = new DefinitionPage();
 
         List<BodyPage> bodyPages = new ArrayList<>();
+
 
         definitionPage.setBodyPages(bodyPages);
         definitionPage.setPage(ctx.PAGE().toString());
@@ -99,6 +281,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         for (int i = 0; i < ctx.body_page().size(); i++) {
             bodyPages.add(visitBody_page(ctx.body_page(i)));
         }
+
         System.out.println(definitionPage.getCloseBracket());
 
         return definitionPage;
@@ -119,24 +302,11 @@ public class BaseVisitor extends ParserpBaseVisitor {
         if (ctx.data() != null) {
             bodyPage.setData(visitData(ctx.data()));
         }
-        if (ctx.ifp() != null) {
-            bodyPage.setPage_if(visitIfp(ctx.ifp()));
-        }
+
         if (ctx.print() != null) {
             bodyPage.setPrint(visitPrint(ctx.print()));
         }
-        if (ctx.varequal() != null) {
-            bodyPage.setVariable(visitVarequal(ctx.varequal()));
-        }
-        if (ctx.foreachp() != null) {
-            bodyPage.setPage_foreach(visitForeachp(ctx.foreachp()));
-        }
-        if (ctx.forp() != null) {
-            bodyPage.setPage_for(visitForp(ctx.forp()));
-        }
-        if (ctx.switchp() != null) {
-            bodyPage.setPage_switch(visitSwitchp(ctx.switchp()));
-        }
+
         if (ctx.include() != null) {
             bodyPage.setInclude(visitInclude(ctx.include()));
         }
@@ -227,12 +397,44 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
     @Override
     public Print visitPrint(Parserp.PrintContext ctx) {
+        Print print = new Print();
+        print.setPrintOpen(ctx.PRINT_OPEN().toString());
+        System.out.println(print.getPrintOpen());
+        if (ctx.STRINGP()!=null){
+            print.setTag(ctx.STRINGP().toString());
+            System.out.println(print.getTag());
+        }
+        if (ctx.VARP()!=null){
+            print.setVar(ctx.VARP().toString());
+            System.out.println(print.getVar());
+        }
+        if (ctx.NUMP()!=null){
+            print.setNum(ctx.NUMP().toString());
+            System.out.println(print.getNum());
+        }
+        print.setPrintclose(ctx.PRINT_CLOSE().toString());
+        System.out.println(print.getPrintclose());
+        print.setSemicolon(ctx.CLOSE().toString());
+        System.out.println(print.getSemicolon());
         return (Print) super.visitPrint(ctx);
     }
 
     @Override
-    public Object visitArr(Parserp.ArrContext ctx) {
-        return super.visitArr(ctx);
+    public ARR  visitArr(Parserp.ArrContext ctx) {
+        System.out.println("visit arry");
+        ARR arr = new ARR();
+
+        arr.setArrayOpen(ctx.ARRAY_OPEN().toString());
+        System.out.println(arr.getArrayOpen());
+
+        if (ctx.bodyarr()!=null){
+            arr.setArr(visitBodyarr(ctx.bodyarr()));
+        }
+
+
+        arr.setArrayClose(ctx.ARRAY_CLOSE().toString());
+        System.out.println(arr.getArrayClose());
+        return arr;
     }
 
     @Override
@@ -241,34 +443,21 @@ public class BaseVisitor extends ParserpBaseVisitor {
     }
 
     @Override
-    public Object visitBodyarr(Parserp.BodyarrContext ctx) {
-        return super.visitBodyarr(ctx);
+    public BodyArr visitBodyarr(Parserp.BodyarrContext ctx) {
+        System.out.println("visit bodyarray");
+        BodyArr bodyArr = new BodyArr();
+        if(ctx.bodyarr1()!=null){
+            bodyArr.setBodyArr1(visitBodyarr1(ctx.bodyarr1()));
+        }
+        if(ctx.bodyarr2()!=null){
+            bodyArr.setBodyArr2(visitBodyarr2(ctx.bodyarr2()));
+        }
+        if(ctx.bodyarr3()!=null){
+            bodyArr.setBodyArr3(visitBodyarr3(ctx.bodyarr3()));
+        }
+        return bodyArr;
     }
 
-    @Override
-    public Variable visitVarequal(Parserp.VarequalContext ctx) {
-        return (Variable) super.visitVarequal(ctx);
-    }
-
-    @Override
-    public Object visitForeach(Parserp.ForeachContext ctx) {
-        return super.visitForeach(ctx);
-    }
-
-    @Override
-    public Page_Foreach visitForeachp(Parserp.ForeachpContext ctx) {
-        return (Page_Foreach) super.visitForeachp(ctx);
-    }
-
-    @Override
-    public Object visitFor(Parserp.ForContext ctx) {
-        return super.visitFor(ctx);
-    }
-
-    @Override
-    public Page_For visitForp(Parserp.ForpContext ctx) {
-        return (Page_For) super.visitForp(ctx);
-    }
 
     @Override
     public Object visitBodyfor(Parserp.BodyforContext ctx) {
@@ -305,30 +494,20 @@ public class BaseVisitor extends ParserpBaseVisitor {
         return super.visitIfc(ctx);
     }
 
-    @Override
-    public Object visitIfcv(Parserp.IfcvContext ctx) {
-        return super.visitIfcv(ctx);
-    }
+
 
     @Override
     public Object visitIf(Parserp.IfContext ctx) {
         return super.visitIf(ctx);
     }
 
-    @Override
-    public Page_IF visitIfp(Parserp.IfpContext ctx) {
-        return (Page_IF) super.visitIfp(ctx);
-    }
+
 
     @Override
     public Object visitSwitch(Parserp.SwitchContext ctx) {
         return super.visitSwitch(ctx);
     }
 
-    @Override
-    public Page_Switch visitSwitchp(Parserp.SwitchpContext ctx) {
-        return (Page_Switch) super.visitSwitchp(ctx);
-    }
 
     @Override
     public Object visitBody_switch(Parserp.Body_switchContext ctx) {
@@ -342,6 +521,21 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
     @Override
     public Include visitInclude(Parserp.IncludeContext ctx) {
+        Include include = new Include();
+        include.setInclude11(ctx.INCLUDE().toString());
+        System.out.println(include.getInclude11());
+        include.setOpenBracket(ctx.OPENC().toString());
+        System.out.println(include.getOpenBracket());
+
+        include.setTagName(ctx.TAG_NAME().toString());
+        System.out.println(include.getTagName());
+
+        include.setCloseBracket(ctx.CLOSEC().toString());
+        System.out.println(include.getCloseBracket());
+
+        include.setClose(ctx.CLOSE().toString());
+        System.out.println(include.getClose());
+
         return (Include) super.visitInclude(ctx);
     }
 
@@ -394,12 +588,14 @@ public class BaseVisitor extends ParserpBaseVisitor {
     protected boolean shouldVisitNextChild(RuleNode node, Object currentResult) {
         return super.shouldVisitNextChild(node, currentResult);
     }
-   /* public void write(String word) {
+    public void write(String word) {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src\\tokens.txt"));
-            bufferedWriter.write(word+"\n");
-        } catch (IOException e) {
-            e.printStackTrace();
+            String filename = "src//file.txt";
+            FileWriter fw = new FileWriter(filename, true); //the true will append the new data
+            fw.write(word + "\n");
+            fw.close();
+        } catch (IOException ioe) {
+            System.err.println("IOException: " + ioe.getMessage());
         }
-    }*/
+    }
 }

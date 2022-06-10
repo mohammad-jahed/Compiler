@@ -158,6 +158,36 @@ public interface ParserpListener extends ParseTreeListener {
 	 */
 	void exitBodyarr(Parserp.BodyarrContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Parserp#bodyarr1}.
+	 * @param ctx the parse tree
+	 */
+	void enterBodyarr1(Parserp.Bodyarr1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#bodyarr1}.
+	 * @param ctx the parse tree
+	 */
+	void exitBodyarr1(Parserp.Bodyarr1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parserp#bodyarr2}.
+	 * @param ctx the parse tree
+	 */
+	void enterBodyarr2(Parserp.Bodyarr2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#bodyarr2}.
+	 * @param ctx the parse tree
+	 */
+	void exitBodyarr2(Parserp.Bodyarr2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parserp#bodyarr3}.
+	 * @param ctx the parse tree
+	 */
+	void enterBodyarr3(Parserp.Bodyarr3Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#bodyarr3}.
+	 * @param ctx the parse tree
+	 */
+	void exitBodyarr3(Parserp.Bodyarr3Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link Parserp#varequal}.
 	 * @param ctx the parse tree
 	 */
@@ -218,6 +248,26 @@ public interface ParserpListener extends ParseTreeListener {
 	 */
 	void exitBodyfor(Parserp.BodyforContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Parserp#bodyforfirstvar}.
+	 * @param ctx the parse tree
+	 */
+	void enterBodyforfirstvar(Parserp.BodyforfirstvarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#bodyforfirstvar}.
+	 * @param ctx the parse tree
+	 */
+	void exitBodyforfirstvar(Parserp.BodyforfirstvarContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parserp#bodyforsecondvar}.
+	 * @param ctx the parse tree
+	 */
+	void enterBodyforsecondvar(Parserp.BodyforsecondvarContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#bodyforsecondvar}.
+	 * @param ctx the parse tree
+	 */
+	void exitBodyforsecondvar(Parserp.BodyforsecondvarContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Parserp#bodyforeach}.
 	 * @param ctx the parse tree
 	 */
@@ -227,6 +277,26 @@ public interface ParserpListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBodyforeach(Parserp.BodyforeachContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parserp#bodyforeachFirstArg}.
+	 * @param ctx the parse tree
+	 */
+	void enterBodyforeachFirstArg(Parserp.BodyforeachFirstArgContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#bodyforeachFirstArg}.
+	 * @param ctx the parse tree
+	 */
+	void exitBodyforeachFirstArg(Parserp.BodyforeachFirstArgContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parserp#bodyforeachSecondArg}.
+	 * @param ctx the parse tree
+	 */
+	void enterBodyforeachSecondArg(Parserp.BodyforeachSecondArgContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#bodyforeachSecondArg}.
+	 * @param ctx the parse tree
+	 */
+	void exitBodyforeachSecondArg(Parserp.BodyforeachSecondArgContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Parserp#bodyifc}.
 	 * @param ctx the parse tree
@@ -268,6 +338,36 @@ public interface ParserpListener extends ParseTreeListener {
 	 */
 	void exitGoto(Parserp.GotoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Parserp#gotobody1}.
+	 * @param ctx the parse tree
+	 */
+	void enterGotobody1(Parserp.Gotobody1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#gotobody1}.
+	 * @param ctx the parse tree
+	 */
+	void exitGotobody1(Parserp.Gotobody1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parserp#gotobody2}.
+	 * @param ctx the parse tree
+	 */
+	void enterGotobody2(Parserp.Gotobody2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#gotobody2}.
+	 * @param ctx the parse tree
+	 */
+	void exitGotobody2(Parserp.Gotobody2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parserp#gotobody3}.
+	 * @param ctx the parse tree
+	 */
+	void enterGotobody3(Parserp.Gotobody3Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#gotobody3}.
+	 * @param ctx the parse tree
+	 */
+	void exitGotobody3(Parserp.Gotobody3Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link Parserp#ifc}.
 	 * @param ctx the parse tree
 	 */
@@ -297,6 +397,26 @@ public interface ParserpListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIf(Parserp.IfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parserp#ifbody}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfbody(Parserp.IfbodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#ifbody}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfbody(Parserp.IfbodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Parserp#elsebody}.
+	 * @param ctx the parse tree
+	 */
+	void enterElsebody(Parserp.ElsebodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Parserp#elsebody}.
+	 * @param ctx the parse tree
+	 */
+	void exitElsebody(Parserp.ElsebodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Parserp#ifp}.
 	 * @param ctx the parse tree

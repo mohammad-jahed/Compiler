@@ -6,12 +6,8 @@ public class BodyPage extends DefinitionPage {
     private Out out ;
     private Link link ;
     private Data data ;
-    private Page_IF page_if ;
     private Print print ;
-    private Page_For page_for ;
-    private Page_Foreach page_foreach ;
-    private Page_Switch page_switch ;
-    private Variable variable ;
+
     private Include include ;
 
     public IN getIn() {
@@ -38,7 +34,7 @@ public class BodyPage extends DefinitionPage {
         this.out = out;
     }
 
-    public String getLink() {
+    public Link getLink() {
         return link;
     }
 
@@ -52,46 +48,6 @@ public class BodyPage extends DefinitionPage {
 
     public void setData(Data data) {
         this.data = data;
-    }
-
-    public Page_IF getPage_if() {
-        return page_if;
-    }
-
-    public void setPage_if(Page_IF page_if) {
-        this.page_if = page_if;
-    }
-
-    public Page_For getPage_for() {
-        return page_for;
-    }
-
-    public void setPage_for(Page_For page_for) {
-        this.page_for = page_for;
-    }
-
-    public Page_Foreach getPage_foreach() {
-        return page_foreach;
-    }
-
-    public void setPage_foreach(Page_Foreach page_foreach) {
-        this.page_foreach = page_foreach;
-    }
-
-    public Page_Switch getPage_switch() {
-        return page_switch;
-    }
-
-    public void setPage_switch(Page_Switch page_switch) {
-        this.page_switch = page_switch;
-    }
-
-    public Variable getVariable() {
-        return variable;
-    }
-
-    public void setVariable(Variable variable) {
-        this.variable = variable;
     }
 
     public Include getInclude() {
