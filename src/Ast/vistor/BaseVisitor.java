@@ -69,13 +69,51 @@ public class BaseVisitor extends ParserpBaseVisitor {
     }
 
     @Override
-    public Object visitVarequal(Parserp.VarequalContext ctx) {
-        return super.visitVarequal(ctx);
+    public Vairable visitVarequal(Parserp.VarequalContext ctx) {
+        Vairable vairable = new Vairable();
+        List<String>nums = new ArrayList<>();
+        vairable.setVarname(ctx.STRINGG().toString());
+        System.out.println(vairable.getVarname());
+        vairable.setEqu(ctx.EQUALVAR().toString());
+        System.out.println(vairable.getEqu());
+        if (ctx.arrv()!=null){
+            vairable.setArray(visitArrv(ctx.arrv()));
+        }
+        if (ctx.NUME()!=null){
+            for (int i=0;i<ctx.NUME().size();i++){
+                nums.add(ctx.NUME(i).toString());
+                System.out.println(ctx.NUME(i));
+            }
+            vairable.setNums(nums);
+
+        }
+        if (ctx.ST()!=null){
+            vairable.setSt(ctx.ST().toString());
+            System.out.println(vairable.getSt());
+        }
+        vairable.setSemicolon(ctx.VAREQUAL_CLOSE().toString());
+        System.out.println(vairable.getSemicolon());
+        return vairable;
     }
 
     @Override
-    public Object visitForeach(Parserp.ForeachContext ctx) {
-        return super.visitForeach(ctx);
+    public ForEach visitForeach(Parserp.ForeachContext ctx) {
+        ForEach forEach = new ForEach();
+        List<Body> bodies = new ArrayList<>();
+        forEach.setForeachOpen(ctx.FOREACHC_OPEN().toString());
+        System.out.println(forEach.getForeachOpen());
+        forEach.setBodyForeach(visitBodyforeach(ctx.bodyforeach()));
+        forEach.setForeachClose(ctx.FOREACH_CLOSE().toString());
+        System.out.println(forEach.getForeachClose());
+        forEach.setOpenBracket(ctx.OPENBRACKET().toString());
+        System.out.println(forEach.getOpenBracket());
+        for (int i=0;i<ctx.body().size();i++){
+            bodies.add(visitBody(ctx.body(i)));
+        }
+        forEach.setBodies(bodies);
+        forEach.setCloseBracket(ctx.CLOSEBRACKET().toString());
+        System.out.println(forEach.getCloseBracket());
+        return forEach;
     }
 
     @Override
@@ -84,8 +122,23 @@ public class BaseVisitor extends ParserpBaseVisitor {
     }
 
     @Override
-    public Object visitFor(Parserp.ForContext ctx) {
-        return super.visitFor(ctx);
+    public For visitFor(Parserp.ForContext ctx) {
+        For forr = new For();
+        List<Body> bodies = new ArrayList<>();
+        forr.setForOpen(ctx.FOR_OPENC().toString());
+        System.out.println(forr.getForOpen());
+        forr.setBodyFor(visitBodyfor(ctx.bodyfor()));
+        forr.setForClose(ctx.FOR_CLOSE().toString());
+        System.out.println(forr.getForClose());
+        forr.setOpenBracket(ctx.OPENBRACKET().toString());
+        System.out.println(forr.getOpenBracket());
+        for (int i=0;i<ctx.body().size();i++){
+            bodies.add(visitBody(ctx.body(i)));
+        }
+        forr.setBodies(bodies);
+        forr.setCloseBracket(ctx.CLOSEBRACKET().toString());
+        System.out.println(forr.getCloseBracket());
+        return forr;
     }
 
     @Override
@@ -219,6 +272,24 @@ public class BaseVisitor extends ParserpBaseVisitor {
             bodyController.setArr(visitArr(ctx.arr()));
             bodyController.setSemiclilon(ctx.CLOSE().toString());
             System.out.println(bodyController.getSemiclilon());
+        }
+        if (ctx.varequal()!=null){
+            bodyController.setVairable(visitVarequal(ctx.varequal()));
+        }
+        if (ctx.if_()!=null){
+            bodyController.setIff(visitIf(ctx.if_()));
+        }
+        if (ctx.goto_()!=null){
+            bodyController.setGoTo(visitGoto(ctx.goto_()));
+        }
+        if (ctx.for_()!=null){
+            bodyController.setForr(visitFor(ctx.for_()));
+        }
+        if (ctx.foreach()!=null){
+            bodyController.setForEach(visitForeach(ctx.foreach()));
+        }
+        if (ctx.validation()!=null){
+            bodyController.setValidation(visitValidation(ctx.validation()));
         }
 
 
@@ -438,8 +509,14 @@ public class BaseVisitor extends ParserpBaseVisitor {
     }
 
     @Override
-    public Object visitArrv(Parserp.ArrvContext ctx) {
-        return super.visitArrv(ctx);
+    public ARRV visitArrv(Parserp.ArrvContext ctx) {
+        ARRV arrv = new ARRV();
+        arrv.setOpenArray(ctx.OPENARRV().toString());
+        System.out.println(arrv.getOpenArray());
+        arrv.setBodyArr(visitBodyarr(ctx.bodyarr()));
+        arrv.setCloseArray(ctx.ARRAY_CLOSE().toString());
+        System.out.println(arrv.getCloseArray());
+        return arrv;
     }
 
     @Override
@@ -460,23 +537,87 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
 
     @Override
-    public Object visitBodyfor(Parserp.BodyforContext ctx) {
-        return super.visitBodyfor(ctx);
+    public BodyFor visitBodyfor(Parserp.BodyforContext ctx) {
+        BodyFor bodyFor = new BodyFor();
+        bodyFor.setBodyForFirstVar(visitBodyforfirstvar(ctx.bodyforfirstvar()));
+        bodyFor.setBdyFor(ctx.BDYFOR().toString());
+        System.out.println(bodyFor.getBdyFor());
+        bodyFor.setBodyForSecondVar(visitBodyforsecondvar(ctx.bodyforsecondvar()));
+        return bodyFor;
     }
 
     @Override
-    public Object visitBodyforeach(Parserp.BodyforeachContext ctx) {
-        return super.visitBodyforeach(ctx);
+    public BodyForeach visitBodyforeach(Parserp.BodyforeachContext ctx) {
+        BodyForeach  bodyForeach = new BodyForeach();
+        bodyForeach.setBodyForeachFirstArg(visitBodyforeachFirstArg(ctx.bodyforeachFirstArg()));
+        bodyForeach.setBDyforeach(ctx.BDYFOREACH().toString());
+        System.out.println(bodyForeach.getBDyforeach());
+        bodyForeach.setBodyForeachSecondArg(visitBodyforeachSecondArg(ctx.bodyforeachSecondArg()));
+        return bodyForeach;
     }
 
     @Override
-    public Object visitBodyifc(Parserp.BodyifcContext ctx) {
-        return super.visitBodyifc(ctx);
+    public BodyIfc visitBodyifc(Parserp.BodyifcContext ctx) {
+        BodyIfc bodyIfc = new BodyIfc();
+        if (ctx.IFN()!=null){
+            bodyIfc.setVar(ctx.IFN().toString());
+            System.out.println(bodyIfc.getVar());
+            if (ctx.TAG_OPERATOR()!=null){
+                bodyIfc.setOperator(ctx.TAG_OPERATOR().toString());
+                System.out.println(bodyIfc.getOperator());
+            }
+            if (ctx.VAREQ()!=null){
+                bodyIfc.setEqu(ctx.VAREQ().toString());
+                System.out.println(bodyIfc.getEqu());
+                bodyIfc.setStr(ctx.STR().toString());
+                System.out.println(bodyIfc.getStr());
+            }
+        }
+        else if (ctx.REQ()!=null){
+            bodyIfc.setReq(ctx.REQ().toString());
+            System.out.println(bodyIfc.getReq());
+            if (ctx.TAG_OPERATOR()!=null){
+                bodyIfc.setOperator(ctx.TAG_OPERATOR().toString());
+                System.out.println(bodyIfc.getOperator());
+            }
+            if (ctx.VAREQ()!=null){
+                bodyIfc.setEqu(ctx.VAREQ().toString());
+                System.out.println(bodyIfc.getEqu());
+                bodyIfc.setStr(ctx.STR().toString());
+                System.out.println(bodyIfc.getStr());
+            }
+        }
+
+        return bodyIfc;
     }
 
     @Override
-    public Object visitBody(Parserp.BodyContext ctx) {
-        return super.visitBody(ctx);
+    public Body visitBody(Parserp.BodyContext ctx) {
+        Body body = new Body();
+        if (ctx.goto_()!=null){
+            body.setGoTo(visitGoto(ctx.goto_()));
+        }
+        if (ctx.varequal()!=null){
+            body.setVairable(visitVarequal(ctx.varequal()));
+        }
+        if (ctx.if_()!=null){
+            body.setIff(visitIf(ctx.if_()));
+        }
+        if (ctx.print()!=null){
+            body.setPrint(visitPrint(ctx.print()));
+        }
+        if (ctx.arr()!=null){
+            body.setArr(visitArr(ctx.arr()));
+            body.setSemicolon(ctx.CLOSE().toString());
+            System.out.println(body.getSemicolon());
+        }
+        if (ctx.for_()!=null){
+            body.setForr(visitFor(ctx.for_()));
+        }
+        if (ctx.foreach()!=null){
+            body.setForEach(visitForeach(ctx.foreach()));
+        }
+        return body;
     }
 
     @Override
@@ -485,23 +626,153 @@ public class BaseVisitor extends ParserpBaseVisitor {
     }
 
     @Override
-    public Object visitGoto(Parserp.GotoContext ctx) {
-        return super.visitGoto(ctx);
+    public GoTo visitGoto(Parserp.GotoContext ctx) {
+        GoTo goTo = new GoTo();
+        List<GoToBody3> goToBody3s = new ArrayList<>();
+        goTo.setGoToBody1(visitGotobody1(ctx.gotobody1()));
+        if (ctx.gotobody2()!=null){
+            goTo.setGoToBody2(visitGotobody2(ctx.gotobody2()));
+            if (ctx.gotobody3()!=null){
+                for (int i=0; i<ctx.gotobody3().size();i++){
+                    goToBody3s.add(visitGotobody3(ctx.gotobody3(i)));
+                }
+                goTo.setGoToBody3s(goToBody3s);
+            }
+            goTo.setClose(ctx.GOTOC().toString());
+            System.out.println(goTo.getClose());
+        }
+        goTo.setSemiColon(ctx.GOTO_CLOSE().toString());
+        System.out.println(goTo.getSemiColon());
+        return goTo;
     }
 
     @Override
-    public Object visitIfc(Parserp.IfcContext ctx) {
-        return super.visitIfc(ctx);
+    public IFC visitIfc(Parserp.IfcContext ctx) {
+        IFC ifc = new IFC();
+        ifc.setIfOpen(ctx.IF_OPENC().toString());
+        System.out.println(ifc.getIfOpen());
+        ifc.setBodyIfc(visitBodyifc(ctx.bodyifc()));
+        ifc.setIfClose(ctx.IF_CLOSE().toString());
+        System.out.println(ifc.getIfClose());
+        return ifc;
     }
 
 
 
     @Override
-    public Object visitIf(Parserp.IfContext ctx) {
-        return super.visitIf(ctx);
+    public IF visitIf(Parserp.IfContext ctx) {
+        IF iff = new IF();
+        iff.setIfc(visitIfc(ctx.ifc()));
+        iff.setIfBody(visitIfbody(ctx.ifbody()));
+        if (ctx.elsebody()!=null){
+            iff.setElseBody(visitElsebody(ctx.elsebody()));
+        }
+        return iff;
     }
 
+    @Override
+    public BodyForFirstVar visitBodyforfirstvar(Parserp.BodyforfirstvarContext ctx) {
+        BodyForFirstVar bodyForFirstVar = new BodyForFirstVar();
+        bodyForFirstVar.setVarName(ctx.FORNA().toString());
+        System.out.println(bodyForFirstVar.getVarName());
+        return bodyForFirstVar;
+    }
 
+    @Override
+    public BodyForSecondVar visitBodyforsecondvar(Parserp.BodyforsecondvarContext ctx) {
+        BodyForSecondVar bodyForSecondVar = new BodyForSecondVar();
+        bodyForSecondVar.setVarName(ctx.FORNA().toString());
+        System.out.println(bodyForSecondVar.getVarName());
+        return bodyForSecondVar;
+    }
+
+    @Override
+    public BodyForeachFirstArg visitBodyforeachFirstArg(Parserp.BodyforeachFirstArgContext ctx) {
+        BodyForeachFirstArg bodyForeachFirstArg = new BodyForeachFirstArg();
+        bodyForeachFirstArg.setVarName(ctx.FOREACHN().toString());
+        System.out.println(bodyForeachFirstArg.getVarName());
+        return bodyForeachFirstArg;
+    }
+
+    @Override
+    public BodyForeachSecondArg visitBodyforeachSecondArg(Parserp.BodyforeachSecondArgContext ctx) {
+        BodyForeachSecondArg bodyForeachSecondArg = new BodyForeachSecondArg();
+        bodyForeachSecondArg.setVarName(ctx.FOREACHN().toString());
+        System.out.println(bodyForeachSecondArg.getVarName());
+        return bodyForeachSecondArg;
+    }
+
+    @Override
+    public GoToBody1 visitGotobody1(Parserp.Gotobody1Context ctx) {
+        GoToBody1 goToBody1 = new GoToBody1();
+        goToBody1.setGotoOpen(ctx.GOTO_OPEN().toString());
+        System.out.println(goToBody1.getGotoOpen());
+        goToBody1.setGotoON(ctx.GOTON().toString());
+        System.out.println(goToBody1.getGotoON());
+        return goToBody1;
+    }
+
+    @Override
+    public GoToBody2 visitGotobody2(Parserp.Gotobody2Context ctx) {
+        GoToBody2 goToBody2 = new GoToBody2();
+        goToBody2.setGotoOP(ctx.GOTOP().toString());
+        System.out.println(goToBody2.getGotoOP());
+        goToBody2.setGotoVar(ctx.GOTOVAR().toString());
+        System.out.println(goToBody2.getGotoVar());
+        goToBody2.setGotoOn(ctx.GOTON().toString());
+        System.out.println(goToBody2.getGotoOn());
+        return goToBody2;
+    }
+
+    @Override
+    public GoToBody3 visitGotobody3(Parserp.Gotobody3Context ctx) {
+        GoToBody3 goToBody3 = new GoToBody3();
+        goToBody3.setGotoComma(ctx.GOTOCOMMA().toString());
+        System.out.println(goToBody3.getGotoComma());
+        goToBody3.setGotoVar(ctx.GOTOVAR().toString());
+        System.out.println(goToBody3.getGotoVar());
+        goToBody3.setGotoOn(ctx.GOTON().toString());
+        System.out.println(goToBody3.getGotoOn());
+        return goToBody3;
+    }
+
+    @Override
+    public IfBody visitIfbody(Parserp.IfbodyContext ctx) {
+        IfBody ifBody = new IfBody();
+        List<Body> bodies = new ArrayList<>();
+        ifBody.setOpenBracket(ctx.OPENBRACKET().toString());
+        System.out.println(ifBody.getOpenBracket());
+
+        if (ctx.body()!=null){
+            for (int i=0;i<ctx.body().size();i++){
+                bodies.add(visitBody(ctx.body(i)));
+            }
+            ifBody.setBodies(bodies);
+        }
+
+        ifBody.setCloseBracket(ctx.CLOSEBRACKET().toString());
+        System.out.println(ifBody.getCloseBracket());
+        return ifBody;
+    }
+
+    @Override
+    public ElseBody visitElsebody(Parserp.ElsebodyContext ctx) {
+        ElseBody elseBody = new ElseBody();
+        List<Body> bodies = new ArrayList<>();
+        elseBody.setElse11(ctx.ELSE11().toString());
+        System.out.println(elseBody.getElse11());
+        elseBody.setOpenBracket(ctx.OPENBRACKET().toString());
+        System.out.println(elseBody.getOpenBracket());
+        if (ctx.body()!=null){
+            for (int i=0;i<ctx.body().size();i++) {
+                bodies.add(visitBody(ctx.body(i)));
+            }
+            elseBody.setBodies(bodies);
+        }
+        elseBody.setCloseBracket(ctx.CLOSEBRACKET().toString());
+        System.out.println(elseBody.getCloseBracket());
+        return elseBody;
+    }
 
     @Override
     public Object visitSwitch(Parserp.SwitchContext ctx) {
@@ -536,22 +807,128 @@ public class BaseVisitor extends ParserpBaseVisitor {
         include.setClose(ctx.CLOSE().toString());
         System.out.println(include.getClose());
 
-        return (Include) super.visitInclude(ctx);
+        return include;
+    }
+
+
+
+    @Override
+    public Valid visitValid(Parserp.ValidContext ctx) {
+        Valid valid = new Valid();
+        if (ctx.REQUIREDV()!=null){
+            valid.setRequired(ctx.REQUIREDV().toString());
+            System.out.println(valid.getRequired());
+        }
+        if (ctx.STRINGV()!=null){
+            valid.setString(ctx.STRINGV().toString());
+            System.out.println(valid.getString());
+        }
+        if (ctx.EMAILV()!=null){
+            valid.setEmail(ctx.EMAILV().toString());
+            System.out.println(valid.getEmail());
+        }
+        if (ctx.MINV()!=null){
+            valid.setMin(ctx.MINV().toString());
+            System.out.println(valid.getMin());
+            valid.setNum(ctx.NUM().toString());
+            System.out.println(valid.getNum());
+        }
+        if (ctx.MAXV()!=null){
+            valid.setMax(ctx.MAXV().toString());
+            System.out.println(valid.getMax());
+            valid.setNum(ctx.NUM().toString());
+            System.out.println(valid.getNum());
+        }
+        return valid;
     }
 
     @Override
-    public Object visitValidn(Parserp.ValidnContext ctx) {
-        return super.visitValidn(ctx);
+    public Validation visitValidation(Parserp.ValidationContext ctx) {
+        Validation validation = new Validation();
+        List<String> strings = new ArrayList<>();
+        List<String> validsstr = new ArrayList<>();
+        List<String> ors = new ArrayList<>();
+        List<String> semicolons = new ArrayList<>();
+        List<Valid> valids = new ArrayList<>();
+        List<Valid1> valid1s = new ArrayList<>();
+        validation.setValidation1(ctx.VALIDATION().toString());
+        System.out.println(validation.getValidation1());
+        validation.setOpenC(ctx.OPENC().toString());
+        System.out.println(validation.getOpenC());
+        validation.setReq(ctx.REQUEST().toString());
+        System.out.println(validation.getReq());
+        validation.setCloseC(ctx.CLOSEC().toString());
+        System.out.println(validation.getCloseC());
+        validation.setOpenBracket(ctx.OPENBRACKET().toString());
+        System.out.println(validation.getOpenBracket());
+        if (ctx.STRINGARR()!=null){
+            for (int i=0;i<ctx.STRINGARR().size();i++) {
+                strings.add(ctx.STRINGARR(i).toString());
+                validsstr.add(ctx.VALID(i).toString());
+                semicolons.add(ctx.CLOSE(i).toString());
+                System.out.println(strings.get(i));
+                System.out.println(validsstr.get(i));
+            }
+            if (ctx.valid()!=null){
+                for (int i=0; i<ctx.valid().size();i++)
+                valids.add(visitValid(ctx.valid(i)));
+
+                validation.setValids(valids);
+            }
+            if (ctx.OR()!=null){
+                for (int m=0;m<ctx.OR().size();m++) {
+                    ors.add(ctx.OR(m).toString());
+                    System.out.println(ors.get(m));
+                }
+                    if (ctx.valid1()!=null) {
+                        for (int i=0;i<ctx.valid1().size();i++)
+                        valid1s.add(visitValid1(ctx.valid1(i)));
+                        validation.setValid1s(valid1s);
+                    }
+
+                validation.setOr(ors);
+
+            }
+            }
+            validation.setStr(strings);
+            validation.setValidstr(validsstr);
+            validation.setSemicolon(semicolons);
+
+        validation.setCloseBracket(ctx.CLOSEBRACKET().toString());
+        System.out.println(validation.getCloseBracket());
+
+
+        return validation;
     }
 
     @Override
-    public Object visitValid(Parserp.ValidContext ctx) {
-        return super.visitValid(ctx);
-    }
-
-    @Override
-    public Object visitValidation(Parserp.ValidationContext ctx) {
-        return super.visitValidation(ctx);
+    public Valid1 visitValid1(Parserp.Valid1Context ctx) {
+        Valid1 valid1 = new Valid1();
+        if (ctx.REQUIREDV()!=null){
+            valid1.setRequired(ctx.REQUIREDV().toString());
+            System.out.println(valid1.getRequired());
+        }
+        if (ctx.STRINGV()!=null){
+            valid1.setString(ctx.STRINGV().toString());
+            System.out.println(valid1.getString());
+        }
+        if (ctx.EMAILV()!=null){
+            valid1.setEmail(ctx.EMAILV().toString());
+            System.out.println(valid1.getEmail());
+        }
+        if (ctx.MINV()!=null){
+            valid1.setMin(ctx.MINV().toString());
+            System.out.println(valid1.getMin());
+            valid1.setNum(ctx.NUM().toString());
+            System.out.println(valid1.getNum());
+        }
+        if (ctx.MAXV()!=null){
+            valid1.setMax(ctx.MAXV().toString());
+            System.out.println(valid1.getMax());
+            valid1.setNum(ctx.NUM().toString());
+            System.out.println(valid1.getNum());
+        }
+        return valid1;
     }
 
     @Override

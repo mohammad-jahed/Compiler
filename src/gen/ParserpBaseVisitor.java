@@ -346,14 +346,14 @@ public class ParserpBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitValidn(Parserp.ValidnContext ctx) { return visitChildren(ctx); }
+	@Override public T visitValid(Parserp.ValidContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitValid(Parserp.ValidContext ctx) { return visitChildren(ctx); }
+	@Override public T visitValid1(Parserp.Valid1Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

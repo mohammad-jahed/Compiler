@@ -293,17 +293,17 @@ public interface ParserpVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInclude(Parserp.IncludeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parserp#validn}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitValidn(Parserp.ValidnContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link Parserp#valid}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitValid(Parserp.ValidContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Parserp#valid1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValid1(Parserp.Valid1Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link Parserp#validation}.
 	 * @param ctx the parse tree
