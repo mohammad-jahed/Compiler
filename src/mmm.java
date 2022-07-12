@@ -10,11 +10,18 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.io.*;
+import java.util.Scanner;
+
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
 public class mmm {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
+
+        String s = "";
+        Tree myTree = new Tree();
+
         try {
             System.out.println("Enter the choice");
             System.out.println("1)Ngfor Standard " + "2)Ngfor Key " + "3)Ngfor Index " + "4)Ngfor Direct Array ");
@@ -37,6 +44,31 @@ public class mmm {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        FileInputStream myFileObject = new FileInputStream("sample1.txt");
+
+        int myData;
+
+        while ((myData = myFileObject.read()) != -1 ) {
+
+            char data = (char) myData;
+            s = Character.toString(data);
+            //  System.out.print(s);
+
+
+            myTree.insert(s);
+            myTree.preOrder();
+
+
+        }
+        myTree.insert("search");
+        myTree.insert("add");
+        myTree.preOrder();
+        if(myTree.search("adddd"))
+            System.out.print("true");
+
+
+
     }
 
 }
