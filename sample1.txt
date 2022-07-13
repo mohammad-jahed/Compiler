@@ -1,1 +1,3 @@
-page p1{in: email(name@fvd.com)->val(id,name);}
+controller c1 controls p1{
+array[1,2,1];
+}

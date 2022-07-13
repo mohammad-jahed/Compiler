@@ -20,17 +20,31 @@ import java.util.List;
 public class BaseVisitor extends ParserpBaseVisitor {
 
     public ArrayList<String> strings = new ArrayList<>();
+    public ArrayList<String> phpControlers = new ArrayList<>();
     @Override
     public BodyArr1 visitBodyarr1(Parserp.Bodyarr1Context ctx) {
         System.out.println("visit bodyarray1");
         BodyArr1 bodyArr1 = new BodyArr1();
+        List<String>comaArres = new ArrayList<>();
+        List<String>strArres2 = new ArrayList<>();
         bodyArr1.setStringArr1(ctx.STRINGARR1().toString());
         System.out.println(bodyArr1.getStringArr1());
+        write(phpControlers.get(0),""+bodyArr1.getStringArr1());
         if(ctx.COMMAARR()!=null){
-            bodyArr1.setComma(ctx.COMMAARR().toString());
-            System.out.println(bodyArr1.getComma());
-            bodyArr1.setStringArr2(ctx.STRINGARR2().toString());
-            System.out.println(bodyArr1.getStringArr2());
+            for (int i=0;i<ctx.COMMAARR().size();i++) {
+                comaArres.add(ctx.COMMAARR(i).toString());
+                write(phpControlers.get(0), "" + comaArres.get(i));
+                strArres2.add(ctx.STRINGARR2(i).toString());
+                write(phpControlers.get(0), "" + strArres2.get(i));
+//                bodyArr1.setComma(ctx.COMMAARR().toString());
+//                System.out.println(bodyArr1.getComma());
+//                write(phpControlers.get(0), "" + bodyArr1.getComma());
+//                bodyArr1.setStringArr2(ctx.STRINGARR2().toString());
+//                System.out.println(bodyArr1.getStringArr2());
+//                write(phpControlers.get(0), "" + bodyArr1.getStringArr2());
+            }
+            bodyArr1.setCommaArres(comaArres);
+            bodyArr1.setStringArres2(strArres2);
         }
         return bodyArr1;
     }
@@ -39,14 +53,32 @@ public class BaseVisitor extends ParserpBaseVisitor {
     public BodyArr2 visitBodyarr2(Parserp.Bodyarr2Context ctx) {
         System.out.println("visit bodyarray2");
         BodyArr2 bodyArr2 = new BodyArr2();
-        bodyArr2.setNumArr(ctx.NUMarr().toString());
-        System.out.println(bodyArr2.getNumArr());
-        if(ctx.COMMAARR()!=null){
-
-            bodyArr2.setComma(ctx.COMMAARR().toString());
-            System.out.println(bodyArr2.getComma());
-            bodyArr2.setNumArr1(ctx.NUMarr1().toString());
-            System.out.println(bodyArr2.getNumArr1());
+        List<String>arrstr1 = new ArrayList<>();
+        List<String>comaesArres = new ArrayList<>();
+        List<String>arrstr2 = new ArrayList<>();
+        for (int i=0 ;i<ctx.NUMarr().size();i++){
+            arrstr1.add(ctx.NUMarr(i).toString());
+            System.out.println(ctx.NUMarr(i));
+            write(phpControlers.get(0),""+arrstr1.get(i));
+        }
+        bodyArr2.setNumesArr(arrstr1);
+//        bodyArr2.setNumArr(ctx.NUMarr().toString());
+//        System.out.println(bodyArr2.getNumArr());
+        if(ctx.COMMAARR()!=null) {
+            for (int i = 0; i < ctx.COMMAARR().size(); i++) {
+                comaesArres.add(ctx.COMMAARR(i).toString());
+                System.out.println(comaesArres.get(i));
+                write(phpControlers.get(0),""+comaesArres.get(i));
+                arrstr2.add(ctx.NUMarr1(i).toString());
+                System.out.println(arrstr2.get(i));
+                write(phpControlers.get(0),""+arrstr2.get(i));
+//                bodyArr2.setComma(ctx.COMMAARR().toString());
+//                System.out.println(bodyArr2.getComma());
+//                bodyArr2.setNumArr1(ctx.NUMarr1().toString());
+//                System.out.println(bodyArr2.getNumArr1());
+            }
+            bodyArr2.setCommaesArres(comaesArres);
+            bodyArr2.setNumesArr1(arrstr2);
         }
         return bodyArr2;
     }
@@ -55,17 +87,38 @@ public class BaseVisitor extends ParserpBaseVisitor {
     public BodyArr3 visitBodyarr3(Parserp.Bodyarr3Context ctx) {
         System.out.println("visit bodyarray3");
         BodyArr3 bodyArr3 = new BodyArr3();
+        List<String>commes = new ArrayList<>();
+        List<String>vaersarr1 = new ArrayList<>();
+        List<String>ArrsN1 = new ArrayList<>();
         bodyArr3.setVarArr(ctx.VARARR().toString());
         System.out.println(bodyArr3.getVarArr());
+        write(phpControlers.get(0),""+bodyArr3.getVarArr());
         bodyArr3.setArrN(ctx.ARRN().toString());
         System.out.println(bodyArr3.getArrN());
-        bodyArr3.setComma(ctx.COMMAARR().toString());
-        System.out.println(bodyArr3.getComma());
-
-        if(ctx.VARARR1()!=null){
-            bodyArr3.setArrN1(ctx.ARRN1().toString());
-            System.out.println(bodyArr3.getArrN1());
+        write(phpControlers.get(0),""+bodyArr3.getArrN());
+        if (ctx.COMMAARR()!=null){
+            for (int i=0;i<ctx.COMMAARR().size();i++){
+                commes.add(ctx.COMMAARR(i).toString());
+                System.out.println(commes.get(i));
+                write(phpControlers.get(0),""+commes.get(i));
+                vaersarr1.add(ctx.VARARR1(i).toString());
+                System.out.println(vaersarr1.get(i));
+                write(phpControlers.get(0),""+vaersarr1.get(i));
+                ArrsN1.add(ctx.ARRN1(i).toString());
+                System.out.println(ArrsN1.get(i));
+                write(phpControlers.get(0),""+ArrsN1.get(i));
+            }
+            bodyArr3.setComaaes(commes);
+            bodyArr3.setVaresArr1(vaersarr1);
+            bodyArr3.setArresN1(ArrsN1);
         }
+//        bodyArr3.setComma(ctx.COMMAARR().toString());
+//        System.out.println(bodyArr3.getComma());
+
+//        if(ctx.VARARR1()!=null){
+//            bodyArr3.setArrN1(ctx.ARRN1().toString());
+//            System.out.println(bodyArr3.getArrN1());
+//        }
         return bodyArr3;
     }
 
@@ -75,8 +128,10 @@ public class BaseVisitor extends ParserpBaseVisitor {
         List<String>nums = new ArrayList<>();
         vairable.setVarname(ctx.STRINGG().toString());
         System.out.println(vairable.getVarname());
+        write(phpControlers.get(0),"$"+vairable.getVarname());
         vairable.setEqu(ctx.EQUALVAR().toString());
         System.out.println(vairable.getEqu());
+        write(phpControlers.get(0),""+vairable.getEqu());
         if (ctx.arrv()!=null){
             vairable.setArray(visitArrv(ctx.arrv()));
         }
@@ -84,6 +139,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
             for (int i=0;i<ctx.NUME().size();i++){
                 nums.add(ctx.NUME(i).toString());
                 System.out.println(ctx.NUME(i));
+                write(phpControlers.get(0),""+nums.get(i));
             }
             vairable.setNums(nums);
 
@@ -91,9 +147,11 @@ public class BaseVisitor extends ParserpBaseVisitor {
         if (ctx.ST()!=null){
             vairable.setSt(ctx.ST().toString());
             System.out.println(vairable.getSt());
+            write(phpControlers.get(0),""+vairable.getSt());
         }
         vairable.setSemicolon(ctx.VAREQUAL_CLOSE().toString());
         System.out.println(vairable.getSemicolon());
+        write(phpControlers.get(0),""+vairable.getSemicolon());
         return vairable;
     }
 
@@ -275,6 +333,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
             bodyController.setArr(visitArr(ctx.arr()));
             bodyController.setSemiclilon(ctx.CLOSE().toString());
             System.out.println(bodyController.getSemiclilon());
+            write(phpControlers.get(0),""+bodyController.getSemiclilon());
         }
         if (ctx.varequal()!=null){
             bodyController.setVairable(visitVarequal(ctx.varequal()));
@@ -310,6 +369,8 @@ public class BaseVisitor extends ParserpBaseVisitor {
         System.out.println(definitionController.getController());
         definitionController.setTagName(ctx.TAG_NAME().toString());
         System.out.println(definitionController.getTagName());
+        phpControlers.add("src//"+definitionController.getTagName()+".php");
+        write(phpControlers.get(0),"<?php"+'\n');
         definitionController.setControls(ctx.CONTROLS().toString());
         System.out.println(definitionController.getControls());
         definitionController.setTagName2(ctx.TAG_NAME4().toString());
@@ -331,6 +392,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
         definitionController.setCloseBracket(ctx.CLOSEBRACKET().toString());
         System.out.println(definitionController.getCloseBracket());
+        write(phpControlers.get(0),"?>");
         return definitionController;
     }
 
@@ -394,6 +456,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
     @Override
     public BodyIn visitBodyIN(Parserp.BodyINContext ctx)
     {
+        System.out.println("vist aaaaaa");
         BodyIn bodyIn = new BodyIn();
         bodyIn.setArrow(ctx.TOIN().toString());
         bodyIn.setOpenBracket(ctx.OPENP().toString());
@@ -446,9 +509,9 @@ public class BaseVisitor extends ParserpBaseVisitor {
                 System.out.println(in.getEmailText());
                 write(strings.get(0),"value=" + '"' +in.getEmailText()+'"');
             }
-            if(ctx.bodyIN()!=null){
-                in.setBodyIn(visitBodyIN(ctx.bodyIN()));
-            }
+//            if(ctx.bodyIN()!=null){
+//                in.setBodyIn(visitBodyIN(ctx.bodyIN()));
+//            }
 
 
         }
@@ -532,6 +595,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
         arr.setArrayOpen(ctx.ARRAY_OPEN().toString());
         System.out.println(arr.getArrayOpen());
+        write(phpControlers.get(0),"array (");
 
         if (ctx.bodyarr()!=null){
             arr.setArr(visitBodyarr(ctx.bodyarr()));
@@ -540,6 +604,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
         arr.setArrayClose(ctx.ARRAY_CLOSE().toString());
         System.out.println(arr.getArrayClose());
+        write(phpControlers.get(0),")");
         return arr;
     }
 
@@ -548,9 +613,11 @@ public class BaseVisitor extends ParserpBaseVisitor {
         ARRV arrv = new ARRV();
         arrv.setOpenArray(ctx.OPENARRV().toString());
         System.out.println(arrv.getOpenArray());
+        write(phpControlers.get(0),"array (");
         arrv.setBodyArr(visitBodyarr(ctx.bodyarr()));
         arrv.setCloseArray(ctx.ARRAY_CLOSE().toString());
         System.out.println(arrv.getCloseArray());
+        write(phpControlers.get(0),")");
         return arrv;
     }
 
