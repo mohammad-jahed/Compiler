@@ -1,1 +1,1 @@
-page p1{in: email(name@fvd.com)->val(id,name);}
+page p1{link(sd)->val(id,name);}

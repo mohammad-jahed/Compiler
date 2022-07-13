@@ -1,7 +1,6 @@
 package Ast.nodes;
 
-public class Link extends BodyPage{
-
+public class Link extends BodyPage {
 
 
     private String link1;
@@ -11,9 +10,9 @@ public class Link extends BodyPage{
     private String semicolon;
     private String arrow;
     private String openBracketR;
-    private String tagR;
+    private String id;
     private String comma;
-    private String tagRR;
+    private String name;
     private String closeBracketR;
 
     public String getLink1() {
@@ -76,12 +75,12 @@ public class Link extends BodyPage{
         this.openBracketR = openBracketR;
     }
 
-    public String getTagR() {
-        return tagR;
+    public String getId() {
+        return id;
     }
 
-    public void setTagR(String tagR) {
-        this.tagR = tagR;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getComma() {
@@ -92,12 +91,12 @@ public class Link extends BodyPage{
         this.comma = comma;
     }
 
-    public String getTagRR() {
-        return tagRR;
+    public String getName() {
+        return name;
     }
 
-    public void setTagRR(String tagRR) {
-        this.tagRR = tagRR;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCloseBracketR() {

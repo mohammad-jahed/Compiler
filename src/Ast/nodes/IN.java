@@ -2,6 +2,40 @@ package Ast.nodes;
 
 public class IN extends BodyPage {
 
+    private String inOpen;
+    private String color;
+    private String openBracket;
+    private String colorText;
+    private String email;
+    private String emailText;
+    private String file;
+    private String imageIn;
+    private String path;
+    private String tag;
+    private String tagText;
+    private String closeBracket;
+    private String semiColon;
+    private BodyIn bodyIn ;
+
+    private String number;
+    private String numberValue;
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getNumberValue() {
+        return numberValue;
+    }
+
+    public void setNumberValue(String numberValue) {
+        this.numberValue = numberValue;
+    }
+
     public String getInOpen() {
         return inOpen;
     }
@@ -117,21 +151,6 @@ public class IN extends BodyPage {
     public void setBodyIn(BodyIn bodyIn) {
         this.bodyIn = bodyIn;
     }
-
-    private String inOpen;
-    private String color;
-    private String openBracket;
-    private String colorText;
-    private String email;
-    private String emailText;
-    private String file;
-    private String imageIn;
-    private String path;
-    private String tag;
-    private String tagText;
-    private String closeBracket;
-    private String semiColon;
-    private BodyIn bodyIn ;
 
 
 }
