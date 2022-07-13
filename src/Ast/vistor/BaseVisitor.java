@@ -8,9 +8,10 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import sun.applet.Main;
+//import sun.applet.Main;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -189,16 +190,16 @@ public class BaseVisitor extends ParserpBaseVisitor {
         Link link = new Link();
         link.setLink1(ctx.LINK().toString());
         System.out.println(link.getLink1());
-        write(link.getLink1());
+        //write(link.getLink1());
         link.setOpenBracket(ctx.OPENC().toString());
         System.out.println(link.getOpenBracket());
-        write(link.getOpenBracket());
+        //write(link.getOpenBracket());
         link.setTag(ctx.TAG_NAME().toString());
         System.out.println(link.getTag());
-        write(link.getTagName());
+        //write(link.getTagName());
         link.setCloseBracket(ctx.CLOSEC().toString());
         System.out.println(link.getCloseBracket());
-        write(link.getCloseBracket());
+        //write(link.getCloseBracket());
         if (ctx.TO()!=null){
             link.setArrow(ctx.TO().toString());
             System.out.println(link.getArrow());
@@ -231,10 +232,10 @@ public class BaseVisitor extends ParserpBaseVisitor {
         Data data = new Data();
         data.setData1(ctx.DATA().toString());
         System.out.println(data.getData1());
-        write(data.getData1());
+        //write(data.getData1());
         data.setOpenBracket(ctx.OPENC().toString());
         System.out.println(data.getOpenBracket());
-        write(data.getOpenBracket());
+        //write(data.getOpenBracket());
         data.setTag(ctx.TAG_NAME().toString());
         System.out.println(data.getTag());
         data.setCloseBracket(ctx.CLOSEC().toString());
@@ -965,9 +966,8 @@ public class BaseVisitor extends ParserpBaseVisitor {
     protected boolean shouldVisitNextChild(RuleNode node, Object currentResult) {
         return super.shouldVisitNextChild(node, currentResult);
     }
-    public void write(String word) {
+    public void write(String filename, String word) {
         try {
-            String filename = "src//file.txt";
             FileWriter fw = new FileWriter(filename, true); //the true will append the new data
             fw.write(word + "\n");
             fw.close();
@@ -975,4 +975,5 @@ public class BaseVisitor extends ParserpBaseVisitor {
             System.err.println("IOException: " + ioe.getMessage());
         }
     }
+
 }

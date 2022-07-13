@@ -17,7 +17,7 @@ import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
 public class mmm {
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
 
         String s = "";
         Tree myTree = new Tree();
@@ -49,7 +49,7 @@ public class mmm {
 
         int myData;
 
-        while ((myData = myFileObject.read()) != -1 ) {
+        while ((myData = myFileObject.read()) != -1) {
 
             char data = (char) myData;
             s = Character.toString(data);
@@ -64,11 +64,24 @@ public class mmm {
         myTree.insert("search");
         myTree.insert("add");
         myTree.preOrder();
-        if(myTree.search("adddd"))
+        if (myTree.search("adddd"))
             System.out.print("true");
+        String file = "src//output.html";
+        write(file, "<h1> hello </h1>");
+        write(file, "<h2> hello </h2>");
+        write(file, "<h3> hello </h3>");
 
 
+    }
 
+    public static void write(String filename, String word) {
+        try {
+            FileWriter fw = new FileWriter(filename, true); //the true will append the new data
+            fw.write(word + "\n");
+            fw.close();
+        } catch (IOException ioe) {
+            System.err.println("IOException: " + ioe.getMessage());
+        }
     }
 
 }
