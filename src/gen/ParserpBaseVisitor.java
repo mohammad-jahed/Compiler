@@ -1,4 +1,4 @@
-// Generated from C:/Users/moham/IdeaProjects/final-1-6-compiler/src\Parserp.g4 by ANTLR 4.10.1
+// Generated from D:/java/f/src\Parserp.g4 by ANTLR 4.10.1
 package gen;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 

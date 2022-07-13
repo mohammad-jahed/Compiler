@@ -66,10 +66,7 @@ public class mmm {
         myTree.preOrder();
         if (myTree.search("adddd"))
             System.out.print("true");
-        String file = "src//output.html";
-        write(file, "<h1> hello </h1>");
-        write(file, "<h2> hello </h2>");
-        write(file, "<h3> hello </h3>");
+
 
 
     }

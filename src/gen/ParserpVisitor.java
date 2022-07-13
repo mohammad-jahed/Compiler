@@ -1,4 +1,4 @@
-// Generated from C:/Users/moham/IdeaProjects/final-1-6-compiler/src\Parserp.g4 by ANTLR 4.10.1
+// Generated from D:/java/f/src\Parserp.g4 by ANTLR 4.10.1
 package gen;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -137,7 +137,7 @@ public interface ParserpVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitForeachp(Parserp.ForeachpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parserp#for}.
+	 * Visit a parse tree produced by .
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -203,7 +203,7 @@ public interface ParserpVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBodyP(Parserp.BodyPContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parserp#goto}.
+	 * Visit a parse tree produced by .
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -239,7 +239,7 @@ public interface ParserpVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfcv(Parserp.IfcvContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parserp#if}.
+	 * Visit a parse tree produced by .
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
@@ -263,7 +263,7 @@ public interface ParserpVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfp(Parserp.IfpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parserp#switch}.
+	 * Visit a parse tree produced by .
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */

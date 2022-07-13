@@ -20,10 +20,10 @@ def_page :
 body_page:(in|out|link|data|ifp|print|varequal|foreachp|forp|switchp|f|include);
 
 
-bodyIN:(TOIN OPENP (N (COMMAM N)?) CLOSEP);
+bodyIN:(TOIN OPENP (N (COMMAM N1)?) CLOSEP);
 bodyOUT:(TOOUT OPENPOUT (NOUT (COMMAMOUT NOUT)?) CLOSEPOUT);
-in:IN_OPEN ((NUMBER  OPENP NU)|(COLOR OPENP H) |(EMAIL OPENP E ) |( (FILE|IMAGEIN)  OPENP PATH )
-|(NUAMIN OPENP N)) CLOSEP bodyIN? IN_CLOSE ;
+in:IN_OPEN ((NUMBER  OPENP NU?)|(COLOR OPENP H?) |(EMAIL OPENP E?) |( (FILE|IMAGEIN)  OPENP PATH? )
+|(NUAMIN OPENP N?)) CLOSEP bodyIN? IN_CLOSE ;
 out:
 (OUT_OPEN) ((TEXT  OPENPOUT NOUT )|(IMAGEOUT  OPENPOUT PATHOUT ) )CLOSEPOUT bodyOUT? OUT_CLOSE ;
 
@@ -173,7 +173,7 @@ validation:VALIDATION OPENC REQUEST CLOSEC OPENBRACKET (STRINGARR VALID ((valid(
 //page p1{in: field(name);}
 //controller c1 controls gg{if(valid($name, $pass)){print ($x);}}
 //page p1{in: radio(name)->val(ff);}
-//page p1{in: email(name@fvd.dd);}
+//page p1{in: email(name@fvd.com)->val(id,name);}
 /*
 
 page p1{

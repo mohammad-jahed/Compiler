@@ -3,8 +3,9 @@ package Ast.nodes;
 public class BodyIn extends IN {
     private String arrow;
     private String openBracket;
-    private String name;
+    private String id;
     private String comma;
+    private String name;
     private String closeBracket;
 
     public String getArrow() {
@@ -25,12 +26,12 @@ public class BodyIn extends IN {
         this.openBracket = openBracket;
     }
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getComma() {
@@ -39,6 +40,14 @@ public class BodyIn extends IN {
 
     public void setComma(String comma) {
         this.comma = comma;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

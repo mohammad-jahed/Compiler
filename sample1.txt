@@ -1,6 +1,1 @@
-controller c1 controls gg{
-  validation ( request ){
-  "fdsgfds"=> required|string;
-  "ss"=> min 4 | max 8;
-  }
-  }
+page p1{in: email(name@fvd.com)->val(id,name);}

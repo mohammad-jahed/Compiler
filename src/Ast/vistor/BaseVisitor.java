@@ -19,7 +19,7 @@ import java.util.List;
 
 public class BaseVisitor extends ParserpBaseVisitor {
 
-
+    public ArrayList<String> strings = new ArrayList<>();
     @Override
     public BodyArr1 visitBodyarr1(Parserp.Bodyarr1Context ctx) {
         System.out.println("visit bodyarray1");
@@ -171,6 +171,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         if (ctx.def_page()!=null){
             for (int i = 0; i < ctx.def_page().size(); i++) {
                 definitionPages.add(visitDef_page(ctx.def_page(i)));
+            page.setDefinitionPages(definitionPages);
         }
 
         }
@@ -178,6 +179,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
             for (int i = 0; i < ctx.def_controller().size(); i++) {
                 definitionControllers.add(visitDef_controller(ctx.def_controller(i)));
             }
+            page.setDefinitionControllers(definitionControllers);
         }
 
 
@@ -343,6 +345,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         definitionPage.setBodyPages(bodyPages);
         definitionPage.setPage(ctx.PAGE().toString());
         definitionPage.setTagName(ctx.TAG_NAME().toString());
+        strings.add("src//"+definitionPage.getTagName()+".html");
         definitionPage.setOpenBracket(ctx.OPENBRACKET().toString());
         definitionPage.setCloseBracket(ctx.CLOSEBRACKET().toString());
         System.out.println(definitionPage.getPage());
@@ -364,6 +367,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         BodyPage bodyPage = new BodyPage();
         if (ctx.in() != null) {
             bodyPage.setIn(visitIn(ctx.in()));
+
         }
         if (ctx.out() != null) {
             bodyPage.setOut(visitOut(ctx.out()));
@@ -388,8 +392,25 @@ public class BaseVisitor extends ParserpBaseVisitor {
     }
 
     @Override
-    public BodyIn visitBodyIN(Parserp.BodyINContext ctx) {
-        return (BodyIn) super.visitBodyIN(ctx);
+    public BodyIn visitBodyIN(Parserp.BodyINContext ctx)
+    {
+        BodyIn bodyIn = new BodyIn();
+        bodyIn.setArrow(ctx.TOIN().toString());
+        bodyIn.setOpenBracket(ctx.OPENP().toString());
+        if(ctx.N()!=null){
+            bodyIn.setId(ctx.N().toString());
+            write(strings.get(0)," id="+'"'+bodyIn.getId()+'"');
+        }
+        if(ctx.COMMAM()!=null){
+            bodyIn.setComma(ctx.COMMAM().toString());
+        }
+        if(ctx.N1()!=null){
+            bodyIn.setName(ctx.N1().toString());
+            write(strings.get(0)," name="+'"'+bodyIn.getName() +'"');
+        }
+        bodyIn.setCloseBracket(ctx.CLOSEP().toString());
+        write(strings.get(0),">"+'\n');
+        return bodyIn;
     }
 
     @Override
@@ -402,6 +423,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         IN in = new IN();
         in.setInOpen(ctx.IN_OPEN().toString());
         System.out.println(in.getInOpen());
+        write(strings.get(0),"<label>");
         if (ctx.COLOR() != null) {
             in.setColor(ctx.COLOR().toString());
             System.out.println(in.getColor());
@@ -415,8 +437,20 @@ public class BaseVisitor extends ParserpBaseVisitor {
             System.out.println(in.getEmail());
             in.setOpenBracket(ctx.OPENP().toString());
             System.out.println(in.getOpenBracket());
-            in.setEmailText(ctx.E().toString());
-            System.out.println(in.getEmailText());
+            write(strings.get(0),"Your Email </label>");
+            write(strings.get(0),in.getEmail()+'"'+'>'+'\n');
+            write(strings.get(0),"<input type="+'"'+in.getEmail()+'"' );
+
+            if(ctx.E()!=null){
+                in.setEmailText(ctx.E().toString());
+                System.out.println(in.getEmailText());
+                write(strings.get(0),"value=" + '"' +in.getEmailText()+'"');
+            }
+            if(ctx.bodyIN()!=null){
+                in.setBodyIn(visitBodyIN(ctx.bodyIN()));
+            }
+
+
         }
         if (ctx.FILE() != null) {
             in.setFile(ctx.FILE().toString());
@@ -969,7 +1003,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
     public void write(String filename, String word) {
         try {
             FileWriter fw = new FileWriter(filename, true); //the true will append the new data
-            fw.write(word + "\n");
+            fw.write(word);
             fw.close();
         } catch (IOException ioe) {
             System.err.println("IOException: " + ioe.getMessage());
