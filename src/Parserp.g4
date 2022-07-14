@@ -21,7 +21,7 @@ body_page:(in|out|link|data|ifp|print|varequal|foreachp|forp|switchp|f|include);
 
 
 bodyIN:(TOIN OPENP (N (COMMAM N1)?) CLOSEP);
-bodyOUT:(TOOUT OPENPOUT (NOUT (COMMAMOUT NOUT)?) CLOSEPOUT);
+bodyOUT:(TOOUT OPENPOUT (NOUT (COMMAMOUT NOUT1)?) CLOSEPOUT);
 in:IN_OPEN ((NUMBER  OPENP NU?)|(COLOR OPENP H?) |(EMAIL OPENP E?) |( (FILE|IMAGEIN)  OPENP PATH? )
 |(NUAMIN OPENP N?)) CLOSEP bodyIN? IN_CLOSE ;
 out:

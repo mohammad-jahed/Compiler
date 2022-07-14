@@ -1,4 +1,4 @@
-// Generated from D:/java/f/src\Parserp.g4 by ANTLR 4.10.1
+// Generated from D:/final-1-6-compiler/src\Parserp.g4 by ANTLR 4.10.1
 package gen;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -218,12 +218,12 @@ public interface ParserpListener extends ParseTreeListener {
 	 */
 	void exitForeachp(Parserp.ForeachpContext ctx);
 	/**
-	 * Enter a parse tree produced by .
+	 * Enter a parse tree produced by {@link Parserp#for}.
 	 * @param ctx the parse tree
 	 */
 	void enterFor(Parserp.ForContext ctx);
 	/**
-	 * Exit a parse tree produced by .
+	 * Exit a parse tree produced by {@link Parserp#for}.
 	 * @param ctx the parse tree
 	 */
 	void exitFor(Parserp.ForContext ctx);
@@ -328,12 +328,12 @@ public interface ParserpListener extends ParseTreeListener {
 	 */
 	void exitBodyP(Parserp.BodyPContext ctx);
 	/**
-	 * Enter a parse tree produced by .
+	 * Enter a parse tree produced by {@link Parserp#goto}.
 	 * @param ctx the parse tree
 	 */
 	void enterGoto(Parserp.GotoContext ctx);
 	/**
-	 * Exit a parse tree produced by .
+	 * Exit a parse tree produced by {@link Parserp#goto}.
 	 * @param ctx the parse tree
 	 */
 	void exitGoto(Parserp.GotoContext ctx);
@@ -388,12 +388,12 @@ public interface ParserpListener extends ParseTreeListener {
 	 */
 	void exitIfcv(Parserp.IfcvContext ctx);
 	/**
-	 * Enter a parse tree produced by .
+	 * Enter a parse tree produced by {@link Parserp#if}.
 	 * @param ctx the parse tree
 	 */
 	void enterIf(Parserp.IfContext ctx);
 	/**
-	 * Exit a parse tree produced by .
+	 * Exit a parse tree produced by {@link Parserp#if}.
 	 * @param ctx the parse tree
 	 */
 	void exitIf(Parserp.IfContext ctx);
@@ -428,12 +428,12 @@ public interface ParserpListener extends ParseTreeListener {
 	 */
 	void exitIfp(Parserp.IfpContext ctx);
 	/**
-	 * Enter a parse tree produced by .
+	 * Enter a parse tree produced by {@link Parserp#switch}.
 	 * @param ctx the parse tree
 	 */
 	void enterSwitch(Parserp.SwitchContext ctx);
 	/**
-	 * Exit a parse tree produced by .
+	 * Exit a parse tree produced by {@link Parserp#switch}.
 	 * @param ctx the parse tree
 	 */
 	void exitSwitch(Parserp.SwitchContext ctx);

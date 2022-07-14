@@ -21,6 +21,8 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
     public ArrayList<String> strings = new ArrayList<>();
     public ArrayList<String> phpControlers = new ArrayList<>();
+    public String out1;
+
     @Override
     public BodyArr1 visitBodyarr1(Parserp.Bodyarr1Context ctx) {
         System.out.println("visit bodyarray1");
@@ -160,17 +162,22 @@ public class BaseVisitor extends ParserpBaseVisitor {
         ForEach forEach = new ForEach();
         List<Body> bodies = new ArrayList<>();
         forEach.setForeachOpen(ctx.FOREACHC_OPEN().toString());
+        write(phpControlers.get(0),forEach.getForeachOpen());
         System.out.println(forEach.getForeachOpen());
         forEach.setBodyForeach(visitBodyforeach(ctx.bodyforeach()));
         forEach.setForeachClose(ctx.FOREACH_CLOSE().toString());
+        write(phpControlers.get(0),forEach.getForeachClose());
         System.out.println(forEach.getForeachClose());
         forEach.setOpenBracket(ctx.OPENBRACKET().toString());
         System.out.println(forEach.getOpenBracket());
-        for (int i=0;i<ctx.body().size();i++){
+        write(phpControlers.get(0),"\n");
+        for (int i = 0; i < ctx.body().size(); i++) {
             bodies.add(visitBody(ctx.body(i)));
         }
         forEach.setBodies(bodies);
         forEach.setCloseBracket(ctx.CLOSEBRACKET().toString());
+        write(phpControlers.get(0),"\n");
+        write(phpControlers.get(0),forEach.getCloseBracket());
         System.out.println(forEach.getCloseBracket());
         return forEach;
     }
@@ -226,15 +233,16 @@ public class BaseVisitor extends ParserpBaseVisitor {
         List<DefinitionPage> definitionPages = new ArrayList<>();
         List<DefinitionController> definitionControllers = new ArrayList<>();
         Page page = new Page();
-        if (ctx.def_page()!=null){
+        if (ctx.def_page() != null) {
             for (int i = 0; i < ctx.def_page().size(); i++) {
                 definitionPages.add(visitDef_page(ctx.def_page(i)));
-            page.setDefinitionPages(definitionPages);
-        }
+                page.setDefinitionPages(definitionPages);
+            }
 
         }
-         if (ctx.def_controller()!=null){
+        if (ctx.def_controller() != null) {
             for (int i = 0; i < ctx.def_controller().size(); i++) {
+
                 definitionControllers.add(visitDef_controller(ctx.def_controller(i)));
             }
             page.setDefinitionControllers(definitionControllers);
@@ -250,36 +258,37 @@ public class BaseVisitor extends ParserpBaseVisitor {
         Link link = new Link();
         link.setLink1(ctx.LINK().toString());
         System.out.println(link.getLink1());
-        //write(link.getLink1());
         link.setOpenBracket(ctx.OPENC().toString());
         System.out.println(link.getOpenBracket());
-        //write(link.getOpenBracket());
         link.setTag(ctx.TAG_NAME().toString());
         System.out.println(link.getTag());
-        //write(link.getTagName());
         link.setCloseBracket(ctx.CLOSEC().toString());
         System.out.println(link.getCloseBracket());
         //write(link.getCloseBracket());
-        if (ctx.TO()!=null){
+        write(strings.get(0), "<a href=" +'"'+ link.getTag() + '"');
+        if (ctx.TO() != null) {
             link.setArrow(ctx.TO().toString());
             System.out.println(link.getArrow());
             link.setOpenBracketR(ctx.OPENC1().toString());
             System.out.println(link.getOpenBracketR());
-            if (ctx.TAG_NAME1()!=null){
-                link.setTagR(ctx.TAG_NAME1().toString());
-                System.out.println(link.getTagR());
+            if (ctx.TAG_NAME1() != null) {
+                link.setId(ctx.TAG_NAME1().toString());
+                write(strings.get(0), " id=" + '"' + link.getId() + '"');
+                System.out.println(link.getId());
                 link.setCloseBracketR(ctx.CLOSEC1().toString());
                 System.out.println(link.getCloseBracketR());
-                if (ctx.COMMA1()!=null){
+                if (ctx.COMMA1() != null) {
                     link.setComma(ctx.COMMA1().toString());
                     System.out.println(link.getComma());
-                    link.setTagRR(ctx.TAG_NAME2().toString());
-                    System.out.println(link.getTagRR());
+                    link.setName(ctx.TAG_NAME2().toString());
+                    System.out.println(link.getName());
+                    write(strings.get(0), ">"+link.getName()+"</a>");
                     link.setCloseBracketR(ctx.CLOSEC1().toString());
                     System.out.println(link.getCloseBracketR());
                 }
             }
         }
+
         link.setSemicolon(ctx.CLOSE().toString());
         System.out.println(link.getSemicolon());
 
@@ -299,26 +308,32 @@ public class BaseVisitor extends ParserpBaseVisitor {
         data.setTag(ctx.TAG_NAME().toString());
         System.out.println(data.getTag());
         data.setCloseBracket(ctx.CLOSEC().toString());
-
-        if (ctx.TO()!=null){
+        if(ctx.TO() == null){
+            write(strings.get(0), "<data>" + data.getTag() + "</data>");
+        }
+        if (ctx.TO() != null) {
             data.setArrow(ctx.TO().toString());
             System.out.println(data.getArrow());
             data.setOpenBracketR(ctx.OPENC1().toString());
             System.out.println(data.getOpenBracketR());
-            if (ctx.TAG_NAME1()!=null){
-                data.setTagR(ctx.TAG_NAME1().toString());
-                System.out.println(data.getTagR());
+            write(strings.get(0), "<data ");
+            if (ctx.TAG_NAME1() != null) {
+                data.setId(ctx.TAG_NAME1().toString());
+                System.out.println(data.getId());
                 data.setCloseBracketR(ctx.CLOSEC1().toString());
                 System.out.println(data.getCloseBracketR());
-                if (ctx.COMMA1()!=null){
+                write(strings.get(0)," id=" + '"' + data.getId() + '"');
+                if (ctx.COMMA1() != null) {
                     data.setComma(ctx.COMMA1().toString());
                     System.out.println(data.getComma());
-                    data.setTagRR(ctx.TAG_NAME2().toString());
-                    System.out.println(data.getTagRR());
+                    data.setName(ctx.TAG_NAME2().toString());
+                    System.out.println(data.getName());
                     data.setCloseBracketR(ctx.CLOSEC1().toString());
                     System.out.println(data.getCloseBracketR());
+                    write(strings.get(0)," name=" + '"' + data.getName() + '"');
                 }
             }
+            write(strings.get(0),">" + data.getTag() + "</data>" +'\n');
         }
         data.setSemicolon(ctx.CLOSE().toString());
         System.out.println(data.getSemicolon());
@@ -410,17 +425,23 @@ public class BaseVisitor extends ParserpBaseVisitor {
         definitionPage.setBodyPages(bodyPages);
         definitionPage.setPage(ctx.PAGE().toString());
         definitionPage.setTagName(ctx.TAG_NAME().toString());
-        strings.add("src//"+definitionPage.getTagName()+".html");
+        strings.add("src//" + definitionPage.getTagName().substring(1,definitionPage.getTagName().length()-1) + ".html");
         definitionPage.setOpenBracket(ctx.OPENBRACKET().toString());
         definitionPage.setCloseBracket(ctx.CLOSEBRACKET().toString());
+        write(strings.get(0),"<!DOCTYPE html>"+'\n');
+        write(strings.get(0),"<html>"+'\n');
+        write(strings.get(0),"<title> "+definitionPage.getTagName().substring(1, definitionPage.getTagName().length() - 1) +" </title>"+'\n');
+
         System.out.println(definitionPage.getPage());
         System.out.println(definitionPage.getTagName().substring(1, definitionPage.getTagName().length() - 1));
         System.out.println(definitionPage.getOpenBracket());
 
-
+        write(strings.get(0),"<body>"+'\n');
         for (int i = 0; i < ctx.body_page().size(); i++) {
             bodyPages.add(visitBody_page(ctx.body_page(i)));
         }
+        write(strings.get(0),"</body>"+'\n');
+        write(strings.get(0),"</html>"+'\n');
 
         System.out.println(definitionPage.getCloseBracket());
 
@@ -430,9 +451,9 @@ public class BaseVisitor extends ParserpBaseVisitor {
     @Override
     public BodyPage visitBody_page(Parserp.Body_pageContext ctx) {
         BodyPage bodyPage = new BodyPage();
+
         if (ctx.in() != null) {
             bodyPage.setIn(visitIn(ctx.in()));
-
         }
         if (ctx.out() != null) {
             bodyPage.setOut(visitOut(ctx.out()));
@@ -451,37 +472,48 @@ public class BaseVisitor extends ParserpBaseVisitor {
         if (ctx.include() != null) {
             bodyPage.setInclude(visitInclude(ctx.include()));
         }
-
-
         return bodyPage;
     }
 
     @Override
-    public BodyIn visitBodyIN(Parserp.BodyINContext ctx)
-    {
-        System.out.println("vist aaaaaa");
+    public BodyIn visitBodyIN(Parserp.BodyINContext ctx) {
         BodyIn bodyIn = new BodyIn();
         bodyIn.setArrow(ctx.TOIN().toString());
         bodyIn.setOpenBracket(ctx.OPENP().toString());
-        if(ctx.N()!=null){
+        if (ctx.N() != null) {
             bodyIn.setId(ctx.N().toString());
-            write(strings.get(0)," id="+'"'+bodyIn.getId()+'"');
+            write(strings.get(0), " id=" + '"' + bodyIn.getId() + '"');
         }
-        if(ctx.COMMAM()!=null){
+        if (ctx.COMMAM() != null) {
             bodyIn.setComma(ctx.COMMAM().toString());
         }
-        if(ctx.N1()!=null){
+        if (ctx.N1() != null) {
             bodyIn.setName(ctx.N1().toString());
-            write(strings.get(0)," name="+'"'+bodyIn.getName() +'"');
+            write(strings.get(0), " name=" + '"' + bodyIn.getName() + '"');
         }
         bodyIn.setCloseBracket(ctx.CLOSEP().toString());
-        write(strings.get(0),">"+'\n');
+        write(strings.get(0), ">" + '\n');
         return bodyIn;
     }
 
     @Override
     public BodyOut visitBodyOUT(Parserp.BodyOUTContext ctx) {
-        return (BodyOut) super.visitBodyOUT(ctx);
+        BodyOut bodyOut = new BodyOut();
+        bodyOut.setArrow(ctx.TOOUT().toString());
+        bodyOut.setOpenBracket(ctx.OPENPOUT().toString());
+        if (ctx.NOUT() != null) {
+            bodyOut.setId(ctx.NOUT().toString());
+            write(strings.get(0), " id=" + '"' + bodyOut.getId() + '"');
+        }
+        if (ctx.COMMAMOUT() != null) {
+            bodyOut.setComma(ctx.COMMAMOUT().toString());
+        }
+        if (ctx.NOUT1() != null) {
+            bodyOut.setName(ctx.NOUT1().toString());
+            write(strings.get(0), " name=" + '"' + bodyOut.getName() + '"');
+        }
+        bodyOut.setCloseBracket(ctx.CLOSEPOUT().toString());
+        return bodyOut;
     }
 
     @Override
@@ -489,49 +521,75 @@ public class BaseVisitor extends ParserpBaseVisitor {
         IN in = new IN();
         in.setInOpen(ctx.IN_OPEN().toString());
         System.out.println(in.getInOpen());
-        write(strings.get(0),"<label>");
+        write(strings.get(0), "<label>");
         if (ctx.COLOR() != null) {
             in.setColor(ctx.COLOR().toString());
             System.out.println(in.getColor());
             in.setOpenBracket(ctx.OPENP().toString());
             System.out.println(in.getOpenBracket());
-            in.setColorText(ctx.H().toString());
             System.out.println(in.getColor());
+            write(strings.get(0), "Your Color </label>" + '\n');
+            write(strings.get(0), "<input type=" + '"' + in.getColor() + '"');
+            if (ctx.H() != null) {
+                in.setColorText(ctx.H().toString());
+                write(strings.get(0), "value=" + '"' + in.getColorText() + '"');
+            }
+
         }
         if (ctx.EMAIL() != null) {
             in.setEmail(ctx.EMAIL().toString());
             System.out.println(in.getEmail());
             in.setOpenBracket(ctx.OPENP().toString());
             System.out.println(in.getOpenBracket());
-            write(strings.get(0),"Your Email </label>");
-            write(strings.get(0),in.getEmail()+'"'+'>'+'\n');
-            write(strings.get(0),"<input type="+'"'+in.getEmail()+'"' );
+            write(strings.get(0), "Your Email </label>");
+            write(strings.get(0), in.getEmail() + '"' + '>' + '\n');
+            write(strings.get(0), "<input type=" + '"' + in.getEmail() + '"');
 
-            if(ctx.E()!=null){
+            if (ctx.E() != null) {
                 in.setEmailText(ctx.E().toString());
                 System.out.println(in.getEmailText());
-                write(strings.get(0),"value=" + '"' +in.getEmailText()+'"');
+                write(strings.get(0), "value=" + '"' + in.getEmailText() + '"');
             }
-//            if(ctx.bodyIN()!=null){
-//                in.setBodyIn(visitBodyIN(ctx.bodyIN()));
-//            }
-
-
         }
         if (ctx.FILE() != null) {
             in.setFile(ctx.FILE().toString());
             in.setOpenBracket(ctx.OPENP().toString());
-            in.setPath(ctx.PATH().toString());
+            write(strings.get(0), "Your File </label>" + '\n');
+            write(strings.get(0), "<input type=" + '"' + in.getFile() + '"');
+            if (ctx.PATH() != null) {
+                in.setPath(ctx.PATH().toString());
+                write(strings.get(0), "src=" + '"' + in.getPath() + '"');
+            }
         }
         if (ctx.IMAGEIN() != null) {
             in.setImageIn(ctx.IMAGEIN().toString());
             in.setOpenBracket(ctx.OPENP().toString());
-            in.setPath(ctx.PATH().toString());
+            write(strings.get(0), "Your Image </label>" + '\n');
+            write(strings.get(0), "<input type=" + '"' + in.getImageIn() + '"');
+            if (ctx.PATH() != null) {
+                in.setPath(ctx.PATH().toString());
+                write(strings.get(0), "src=" + '"' + in.getPath() + '"');
+            }
+        }
+        if (ctx.NUMBER() != null) {
+            in.setNumber(ctx.NUMBER().toString());
+            in.setOpenBracket(ctx.OPENP().toString());
+            write(strings.get(0), "Your Number </label>" + '\n');
+            write(strings.get(0), "<input type=" + '"' + in.getNumber() + '"');
+            if (ctx.NU() != null) {
+                in.setNumberValue(ctx.NU().toString());
+                write(strings.get(0), "value=" + '"' + in.getNumberValue() + '"');
+            }
         }
         if (ctx.NUAMIN() != null) {
             in.setTag(ctx.NUAMIN().toString());
             in.setOpenBracket(ctx.OPENP().toString());
-            in.setTagText(ctx.N().toString());
+            write(strings.get(0), "Your "+in.getTag()+ " </label>" + '\n');
+            write(strings.get(0), "<input type=" + '"' + in.getTag() + '"');
+            if (ctx.N() != null) {
+                in.setTagText(ctx.N().toString());
+                write(strings.get(0), "value=" + '"' + in.getTag() + '"');
+            }
         }
         in.setCloseBracket(ctx.CLOSEP().toString());
         System.out.println(in.getCloseBracket());
@@ -547,24 +605,43 @@ public class BaseVisitor extends ParserpBaseVisitor {
     public Out visitOut(Parserp.OutContext ctx) {
         Out out = new Out();
         out.setName(ctx.OUT_OPEN().toString());
-        if(ctx.TEXT()!=null){
+        if (ctx.TEXT() != null) {
             out.setText(ctx.TEXT().toString());
             out.setOpenBracket(ctx.OPENPOUT().toString());
             out.setTagName(ctx.NOUT().toString());
+            out1 = out.getTagName();
+            if (ctx.bodyOUT() == null) {
+                write(strings.get(0), "<output> " + out.getTagName() + "</output>");
+            } else {
+                write(strings.get(0), "<output ");
+                out.setBodyOut(visitBodyOUT(ctx.bodyOUT()));
+                write(strings.get(0), "> " + out1 + " </output>" + '\n');
+            }
+
         }
-        if(ctx.IMAGEOUT()!=null){
+        if (ctx.IMAGEOUT() != null) {
             out.setImage(ctx.IMAGEOUT().toString());
             out.setOpenBracket(ctx.OPENPOUT().toString());
             out.setPath(ctx.PATHOUT().toString());
+            out1 = null;
+            out1 = out.getPath();
+            if (ctx.bodyOUT() == null) {
+                write(strings.get(0), "<img src=" + '"' + out1 + '"' + ">");
+            } else {
+                write(strings.get(0), "<img ");
+                write(strings.get(0), "src=" + '"' + out1 + '"');
+                out.setBodyOut(visitBodyOUT(ctx.bodyOUT()));
+                write(strings.get(0), ">");
+            }
         }
 
         out.setCloseBracket(ctx.CLOSEPOUT().toString());
-        if(ctx.bodyOUT()!=null){
-            out.setBodyOut(visitBodyOUT(ctx.bodyOUT()));
+        if (ctx.OUT_CLOSE() != null) {
+            out.setSemiColon(ctx.OUT_CLOSE().toString());
+            System.out.println(out.getSemiColon());
         }
-        out.setSemiColon(ctx.OUT_CLOSE().toString());
-        System.out.println(out.getSemiColon());
-        return (Out) super.visitOut(ctx);
+        out.setSemiColon(ctx.CLOSEPOUT().toString());
+        return out;
     }
 
     @Override
@@ -665,13 +742,15 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
     @Override
     public BodyForeach visitBodyforeach(Parserp.BodyforeachContext ctx) {
-        BodyForeach  bodyForeach = new BodyForeach();
+        BodyForeach bodyForeach = new BodyForeach();
         bodyForeach.setBodyForeachFirstArg(visitBodyforeachFirstArg(ctx.bodyforeachFirstArg()));
         bodyForeach.setBDyforeach(ctx.BDYFOREACH().toString());
+        write(phpControlers.get(0),bodyForeach.getBDyforeach());
         System.out.println(bodyForeach.getBDyforeach());
         bodyForeach.setBodyForeachSecondArg(visitBodyforeachSecondArg(ctx.bodyforeachSecondArg()));
         return bodyForeach;
     }
+
 
     @Override
     public BodyIfc visitBodyifc(Parserp.BodyifcContext ctx) {
@@ -819,6 +898,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         BodyForeachFirstArg bodyForeachFirstArg = new BodyForeachFirstArg();
         bodyForeachFirstArg.setVarName(ctx.FOREACHN().toString());
         System.out.println(bodyForeachFirstArg.getVarName());
+        write(phpControlers.get(0),'$'+bodyForeachFirstArg.getVarName());
         return bodyForeachFirstArg;
     }
 
@@ -826,6 +906,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
     public BodyForeachSecondArg visitBodyforeachSecondArg(Parserp.BodyforeachSecondArgContext ctx) {
         BodyForeachSecondArg bodyForeachSecondArg = new BodyForeachSecondArg();
         bodyForeachSecondArg.setVarName(ctx.FOREACHN().toString());
+        write(phpControlers.get(0),'$'+bodyForeachSecondArg.getVarName());
         System.out.println(bodyForeachSecondArg.getVarName());
         return bodyForeachSecondArg;
     }
