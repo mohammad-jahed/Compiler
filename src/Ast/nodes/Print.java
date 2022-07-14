@@ -1,10 +1,12 @@
 package Ast.nodes;
 
-public class Print extends BodyPage{
+public class Print extends BodyController{
     private String printOpen;
     private String tag;
     private String var;
     private String num;
+
+    private String prp;
     private String printclose;
 
     public String getPrintOpen() {
@@ -53,6 +55,14 @@ public class Print extends BodyPage{
 
     public void setSemicolon(String semicolon) {
         this.semicolon = semicolon;
+    }
+
+    public String getPrp() {
+        return prp;
+    }
+
+    public void setPrp(String prp) {
+        this.prp = prp;
     }
 
     private String semicolon;

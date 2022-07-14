@@ -353,6 +353,9 @@ public class BaseVisitor extends ParserpBaseVisitor {
         if (ctx.validation()!=null){
             bodyController.setValidation(visitValidation(ctx.validation()));
         }
+        if (ctx.print()!=null){
+            bodyController.setPrint(visitPrint(ctx.print()));
+        }
 
 
 
@@ -569,23 +572,35 @@ public class BaseVisitor extends ParserpBaseVisitor {
         Print print = new Print();
         print.setPrintOpen(ctx.PRINT_OPEN().toString());
         System.out.println(print.getPrintOpen());
+        write(phpControlers.get(0),""+print.getPrintOpen().substring(0,5)+" ");
+
         if (ctx.STRINGP()!=null){
             print.setTag(ctx.STRINGP().toString());
             System.out.println(print.getTag());
+            write(phpControlers.get(0),""+print.getTag());
         }
         if (ctx.VARP()!=null){
             print.setVar(ctx.VARP().toString());
             System.out.println(print.getVar());
+            write(phpControlers.get(0),""+print.getVar());
         }
         if (ctx.NUMP()!=null){
             print.setNum(ctx.NUMP().toString());
             System.out.println(print.getNum());
+            write(phpControlers.get(0),""+print.getNum());
+        }
+        if (ctx.PRP()!=null){
+            print.setPrp(ctx.PRP().toString());
+            System.out.println(print.getPrp());
+            write(phpControlers.get(0),"$_REQUEST["+"'"+print.getPrp().substring(9,print.getPrp().length())+"'"+"]");
+
         }
         print.setPrintclose(ctx.PRINT_CLOSE().toString());
         System.out.println(print.getPrintclose());
         print.setSemicolon(ctx.CLOSE().toString());
         System.out.println(print.getSemicolon());
-        return (Print) super.visitPrint(ctx);
+        write(phpControlers.get(0),""+print.getSemicolon());
+        return print;
     }
 
     @Override
@@ -664,29 +679,38 @@ public class BaseVisitor extends ParserpBaseVisitor {
         if (ctx.IFN()!=null){
             bodyIfc.setVar(ctx.IFN().toString());
             System.out.println(bodyIfc.getVar());
+            write(phpControlers.get(0),"$"+bodyIfc.getVar());
             if (ctx.TAG_OPERATOR()!=null){
                 bodyIfc.setOperator(ctx.TAG_OPERATOR().toString());
                 System.out.println(bodyIfc.getOperator());
+                write(phpControlers.get(0),""+bodyIfc.getOperator());
             }
             if (ctx.VAREQ()!=null){
                 bodyIfc.setEqu(ctx.VAREQ().toString());
                 System.out.println(bodyIfc.getEqu());
+                write(phpControlers.get(0),""+bodyIfc.getEqu());
                 bodyIfc.setStr(ctx.STR().toString());
                 System.out.println(bodyIfc.getStr());
+                write(phpControlers.get(0),""+bodyIfc.getStr());
             }
         }
         else if (ctx.REQ()!=null){
             bodyIfc.setReq(ctx.REQ().toString());
+            System.out.println("###################################################");
             System.out.println(bodyIfc.getReq());
+            write(phpControlers.get(0),"$_REQUEST["+"'"+bodyIfc.getReq().substring(9,bodyIfc.getReq().length())+"'"+"]");
             if (ctx.TAG_OPERATOR()!=null){
                 bodyIfc.setOperator(ctx.TAG_OPERATOR().toString());
                 System.out.println(bodyIfc.getOperator());
+                write(phpControlers.get(0),""+bodyIfc.getOperator());
             }
             if (ctx.VAREQ()!=null){
                 bodyIfc.setEqu(ctx.VAREQ().toString());
                 System.out.println(bodyIfc.getEqu());
+                write(phpControlers.get(0),""+bodyIfc.getEqu());
                 bodyIfc.setStr(ctx.STR().toString());
                 System.out.println(bodyIfc.getStr());
+                write(phpControlers.get(0),""+bodyIfc.getStr());
             }
         }
 
@@ -753,9 +777,11 @@ public class BaseVisitor extends ParserpBaseVisitor {
         IFC ifc = new IFC();
         ifc.setIfOpen(ctx.IF_OPENC().toString());
         System.out.println(ifc.getIfOpen());
+        write(phpControlers.get(0),""+ifc.getIfOpen());
         ifc.setBodyIfc(visitBodyifc(ctx.bodyifc()));
         ifc.setIfClose(ctx.IF_CLOSE().toString());
         System.out.println(ifc.getIfClose());
+        write(phpControlers.get(0),""+ifc.getIfClose());
         return ifc;
     }
 
@@ -844,6 +870,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         List<Body> bodies = new ArrayList<>();
         ifBody.setOpenBracket(ctx.OPENBRACKET().toString());
         System.out.println(ifBody.getOpenBracket());
+        write(phpControlers.get(0),""+ifBody.getOpenBracket()+'\n');
 
         if (ctx.body()!=null){
             for (int i=0;i<ctx.body().size();i++){
@@ -854,6 +881,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
         ifBody.setCloseBracket(ctx.CLOSEBRACKET().toString());
         System.out.println(ifBody.getCloseBracket());
+        write(phpControlers.get(0),""+ifBody.getCloseBracket());
         return ifBody;
     }
 
@@ -863,8 +891,10 @@ public class BaseVisitor extends ParserpBaseVisitor {
         List<Body> bodies = new ArrayList<>();
         elseBody.setElse11(ctx.ELSE11().toString());
         System.out.println(elseBody.getElse11());
+        write(phpControlers.get(0),""+elseBody.getElse11());
         elseBody.setOpenBracket(ctx.OPENBRACKET().toString());
         System.out.println(elseBody.getOpenBracket());
+        write(phpControlers.get(0),""+elseBody.getOpenBracket()+'\n');
         if (ctx.body()!=null){
             for (int i=0;i<ctx.body().size();i++) {
                 bodies.add(visitBody(ctx.body(i)));
@@ -873,6 +903,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         }
         elseBody.setCloseBracket(ctx.CLOSEBRACKET().toString());
         System.out.println(elseBody.getCloseBracket());
+        write(phpControlers.get(0),""+elseBody.getCloseBracket());
         return elseBody;
     }
 

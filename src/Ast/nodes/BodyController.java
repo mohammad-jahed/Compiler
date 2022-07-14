@@ -4,6 +4,7 @@ public class BodyController extends DefinitionController{
     private ARR arr;
     private String semiclilon;
     private Vairable vairable;
+    private Print print;
     private IF iff;
     private GoTo goTo;
     private For forr;
@@ -72,5 +73,13 @@ public class BodyController extends DefinitionController{
 
     public void setValidation(Validation validation) {
         this.validation = validation;
+    }
+
+    public Print getPrint() {
+        return print;
+    }
+
+    public void setPrint(Print print) {
+        this.print = print;
     }
 }

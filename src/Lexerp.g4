@@ -9,7 +9,7 @@ LINK:
  DATA:
  'data'
   ;
-  ELSEIF1:'else';
+ // ELSEIF1:'else';
   ELSE11:'else' SEA_WS*;
   GOTO_OPEN
   :
