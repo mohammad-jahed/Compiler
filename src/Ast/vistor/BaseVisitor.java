@@ -101,17 +101,22 @@ public class BaseVisitor extends ParserpBaseVisitor {
         ForEach forEach = new ForEach();
         List<Body> bodies = new ArrayList<>();
         forEach.setForeachOpen(ctx.FOREACHC_OPEN().toString());
+        write(strings.get(0),forEach.getForeachOpen());
         System.out.println(forEach.getForeachOpen());
         forEach.setBodyForeach(visitBodyforeach(ctx.bodyforeach()));
         forEach.setForeachClose(ctx.FOREACH_CLOSE().toString());
+        write(strings.get(0),forEach.getForeachClose());
         System.out.println(forEach.getForeachClose());
         forEach.setOpenBracket(ctx.OPENBRACKET().toString());
         System.out.println(forEach.getOpenBracket());
+        write(strings.get(0),"\n");
         for (int i = 0; i < ctx.body().size(); i++) {
             bodies.add(visitBody(ctx.body(i)));
         }
         forEach.setBodies(bodies);
         forEach.setCloseBracket(ctx.CLOSEBRACKET().toString());
+        write(strings.get(0),"\n");
+        write(strings.get(0),forEach.getCloseBracket());
         System.out.println(forEach.getCloseBracket());
         return forEach;
     }
@@ -176,6 +181,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         }
         if (ctx.def_controller() != null) {
             for (int i = 0; i < ctx.def_controller().size(); i++) {
+
                 definitionControllers.add(visitDef_controller(ctx.def_controller(i)));
             }
             page.setDefinitionControllers(definitionControllers);
@@ -315,6 +321,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         System.out.println(definitionController.getController());
         definitionController.setTagName(ctx.TAG_NAME().toString());
         System.out.println(definitionController.getTagName());
+        strings.add("src//" + definitionController.getTagName() + ".php");
         definitionController.setControls(ctx.CONTROLS().toString());
         System.out.println(definitionController.getControls());
         definitionController.setTagName2(ctx.TAG_NAME4().toString());
@@ -654,6 +661,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         BodyForeach bodyForeach = new BodyForeach();
         bodyForeach.setBodyForeachFirstArg(visitBodyforeachFirstArg(ctx.bodyforeachFirstArg()));
         bodyForeach.setBDyforeach(ctx.BDYFOREACH().toString());
+        write(strings.get(0),bodyForeach.getBDyforeach());
         System.out.println(bodyForeach.getBDyforeach());
         bodyForeach.setBodyForeachSecondArg(visitBodyforeachSecondArg(ctx.bodyforeachSecondArg()));
         return bodyForeach;
@@ -792,6 +800,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         BodyForeachFirstArg bodyForeachFirstArg = new BodyForeachFirstArg();
         bodyForeachFirstArg.setVarName(ctx.FOREACHN().toString());
         System.out.println(bodyForeachFirstArg.getVarName());
+        write(strings.get(0),'$'+bodyForeachFirstArg.getVarName());
         return bodyForeachFirstArg;
     }
 
@@ -799,6 +808,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
     public BodyForeachSecondArg visitBodyforeachSecondArg(Parserp.BodyforeachSecondArgContext ctx) {
         BodyForeachSecondArg bodyForeachSecondArg = new BodyForeachSecondArg();
         bodyForeachSecondArg.setVarName(ctx.FOREACHN().toString());
+        write(strings.get(0),'$'+bodyForeachSecondArg.getVarName());
         System.out.println(bodyForeachSecondArg.getVarName());
         return bodyForeachSecondArg;
     }
