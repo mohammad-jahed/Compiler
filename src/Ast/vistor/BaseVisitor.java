@@ -353,14 +353,20 @@ public class BaseVisitor extends ParserpBaseVisitor {
         strings.add("src//" + definitionPage.getTagName() + ".html");
         definitionPage.setOpenBracket(ctx.OPENBRACKET().toString());
         definitionPage.setCloseBracket(ctx.CLOSEBRACKET().toString());
+        write(strings.get(0),"<!DOCTYPE html>"+'\n');
+        write(strings.get(0),"<html>"+'\n');
+        write(strings.get(0),"<title> "+definitionPage.getTagName().substring(1, definitionPage.getTagName().length() - 1) +" </title>"+'\n');
+
         System.out.println(definitionPage.getPage());
         System.out.println(definitionPage.getTagName().substring(1, definitionPage.getTagName().length() - 1));
         System.out.println(definitionPage.getOpenBracket());
 
-
+        write(strings.get(0),"<body>"+'\n');
         for (int i = 0; i < ctx.body_page().size(); i++) {
             bodyPages.add(visitBody_page(ctx.body_page(i)));
         }
+        write(strings.get(0),"</body>"+'\n');
+        write(strings.get(0),"</html>"+'\n');
 
         System.out.println(definitionPage.getCloseBracket());
 
@@ -370,9 +376,9 @@ public class BaseVisitor extends ParserpBaseVisitor {
     @Override
     public BodyPage visitBody_page(Parserp.Body_pageContext ctx) {
         BodyPage bodyPage = new BodyPage();
+
         if (ctx.in() != null) {
             bodyPage.setIn(visitIn(ctx.in()));
-
         }
         if (ctx.out() != null) {
             bodyPage.setOut(visitOut(ctx.out()));
@@ -391,8 +397,6 @@ public class BaseVisitor extends ParserpBaseVisitor {
         if (ctx.include() != null) {
             bodyPage.setInclude(visitInclude(ctx.include()));
         }
-
-
         return bodyPage;
     }
 
