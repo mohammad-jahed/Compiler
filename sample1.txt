@@ -1,1 +1,4 @@
-page p1{link(sd)->val(id,name);}
+page p1{
+@include(p2);
+data(sd)->val(id,name);
+}

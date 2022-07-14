@@ -241,26 +241,32 @@ public class BaseVisitor extends ParserpBaseVisitor {
         data.setTag(ctx.TAG_NAME().toString());
         System.out.println(data.getTag());
         data.setCloseBracket(ctx.CLOSEC().toString());
-
+        if(ctx.TO() == null){
+            write(strings.get(0), "<data>" + data.getTag() + "</data>");
+        }
         if (ctx.TO() != null) {
             data.setArrow(ctx.TO().toString());
             System.out.println(data.getArrow());
             data.setOpenBracketR(ctx.OPENC1().toString());
             System.out.println(data.getOpenBracketR());
+            write(strings.get(0), "<data ");
             if (ctx.TAG_NAME1() != null) {
-                data.setTagR(ctx.TAG_NAME1().toString());
-                System.out.println(data.getTagR());
+                data.setId(ctx.TAG_NAME1().toString());
+                System.out.println(data.getId());
                 data.setCloseBracketR(ctx.CLOSEC1().toString());
                 System.out.println(data.getCloseBracketR());
+                write(strings.get(0)," id=" + '"' + data.getId() + '"');
                 if (ctx.COMMA1() != null) {
                     data.setComma(ctx.COMMA1().toString());
                     System.out.println(data.getComma());
-                    data.setTagRR(ctx.TAG_NAME2().toString());
-                    System.out.println(data.getTagRR());
+                    data.setName(ctx.TAG_NAME2().toString());
+                    System.out.println(data.getName());
                     data.setCloseBracketR(ctx.CLOSEC1().toString());
                     System.out.println(data.getCloseBracketR());
+                    write(strings.get(0)," name=" + '"' + data.getName() + '"');
                 }
             }
+            write(strings.get(0),">" + data.getTag() + "</data>" +'\n');
         }
         data.setSemicolon(ctx.CLOSE().toString());
         System.out.println(data.getSemicolon());
@@ -897,6 +903,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
         include.setClose(ctx.CLOSE().toString());
         System.out.println(include.getClose());
+        write(strings.get(0),"<div w3-include-html="+'"'+include.getTagName()+".html"+'"'+"></div>"+'\n');
 
         return include;
     }
