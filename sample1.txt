@@ -1,3 +1,11 @@
+page gg{
+    in: email(name@fvd.com)->val(id,name);
+    in: field(name)->val(id1,name);
+}
+page p1{
+     in: email(name@fvd.com)->val(id,name);
+     in: field(name)->val(id1,name);
+}
 
 controller c1 controls gg{
  switch(request->name)
