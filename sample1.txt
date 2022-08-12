@@ -1,29 +1,17 @@
-page gg{
-    in: email(name@fvd.com)->val(id,name);
-    in: field(name)->val(id1,name);
+page p15{
+in: text(ssss)->val(username,usernameid);
+in: text(mmm)->val(username1,usernameid1);
 }
-page p1{
-     in: email(name@fvd.com)->val(id,name);
-     in: field(name)->val(id1,name);
+controller c1 controls p15{
+$a="mmmm";
 }
-
-controller c1 controls gg{
- switch(request->name)
-  	case:"nwar"
- $A1 = array["red","green","blue"];
-  	break;
-
-  	case:"mohammad"
- if($fd)
-  {
-  goto p($d);
-  print("d");
-
-  }
-  	break;
-endswitch
+page p25{
+in: text(ssss1)->val(username2,usernameid2);
+in: text(mmm1)->val(username3,usernameid3);
 }
-
+controller c2 controls p25{
+$a="mmmm2";
+}
 
 
 

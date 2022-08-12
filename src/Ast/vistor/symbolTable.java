@@ -1,3 +1,4 @@
+package Ast.vistor;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -49,7 +50,8 @@ public class symbolTable {
 
     public String[][] add() {
         File file = new File(
-                "D:\\java\\finalCompiler\\sample1.txt");
+                "D:\\compiler final project\\Compiler\\sample1.txt");
+
 
         int controller = 1;
         int in = 1;
@@ -93,15 +95,15 @@ public class symbolTable {
                 } else if (temp.contains("controls")) {
                     String help = scan.next();
                     String result = search(help);
-                    if (Objects.equals(result, "exit")) {
-                        arr[1][controls] = help;
+//                    if (Objects.equals(result, "exit")) {
+                        arr[1][controls] = help.substring(0,help.length() - 1);
                         System.out.println(arr[1][controls]);
 
                         controls++;
-                    } else {
-                        int number = getLineNumber(file,arr[1][controls]);
-                        System.out.println("-------There is a variable named " + help + "   "+number);
-                    }
+//                    } else {
+//                        int number = getLineNumber(file,arr[1][controls]);
+//                        System.out.println("-------There is a variable named " + help + "   "+number);
+//                    }
 
                 } else if (temp.contains("validation")) {
                     arr[2][validation] = "true";
@@ -146,7 +148,7 @@ public class symbolTable {
                     System.out.println(arr[9][page]);
                     page++;
 
-                } else if (temp.matches("in")) {
+                } else if (temp.matches("in:")) {
 
                     arr[10][in] = scan.next();
                     System.out.println(arr[10][in]);

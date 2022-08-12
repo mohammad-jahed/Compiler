@@ -1,6 +1,5 @@
 package Ast.vistor;
 
-
 import Ast.nodes.*;
 import gen.Parserp;
 import gen.ParserpBaseVisitor;
@@ -14,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class BaseVisitor extends ParserpBaseVisitor {
@@ -23,6 +23,14 @@ public class BaseVisitor extends ParserpBaseVisitor {
     public static int htmlCounter = 0;
     public static int phpCounter = 0;
     public String out1;
+    public  int index;
+    public String name="";
+    public String[][] st=new symbolTable().add();
+    public static int formcounter=0;
+    public static int incounter=0;
+
+
+
 
     @Override
     public BodyArr1 visitBodyarr1(Parserp.Bodyarr1Context ctx) {
@@ -447,11 +455,16 @@ public class BaseVisitor extends ParserpBaseVisitor {
         for (int i = 0; i < ctx.body_page().size(); i++) {
             bodyPages.add(visitBody_page(ctx.body_page(i)));
         }
+        if (incounter!=0){
+            write(htmlController.get(htmlCounter), "<input type="+"submit" + '"' +" "+  ">"+"submit"+"</input>");
+            write(htmlController.get(htmlCounter), "</form>");
+        }
         write(htmlController.get(htmlCounter), "</body>" + '\n');
         write(htmlController.get(htmlCounter), "</html>" + '\n');
 
         System.out.println(definitionPage.getCloseBracket());
         htmlCounter++;
+        incounter=0;
         return definitionPage;
     }
 
@@ -461,6 +474,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
         if (ctx.in() != null) {
             bodyPage.setIn(visitIn(ctx.in()));
+            incounter++;
         }
         if (ctx.out() != null) {
             bodyPage.setOut(visitOut(ctx.out()));
@@ -530,7 +544,24 @@ public class BaseVisitor extends ParserpBaseVisitor {
         System.out.println(in.getInOpen());
         Random random = new Random();
         int rand = random.nextInt();
-        write(htmlController.get(htmlCounter), "<form id=" + '"' + "id" + rand + '"' + ">");
+        for (int i=0;i<10;i++){
+            if(Objects.equals(st[1][i], htmlController.get(htmlCounter).substring(5, htmlController.get(htmlCounter).length() - 5))){
+                index=i;
+//                System.out.println("okkkkkkkkkkkkkkkkkkkkkk");
+            }
+        }
+            name=st[0][index];
+//        System.out.println("herrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+//        System.out.println(htmlController.get(htmlCounter).substring(5,htmlController.get(htmlCounter).length()-5));
+//        System.out.println(st[1][1]);
+//        System.out.println(index);
+//        System.out.println(name);
+//        System.out.println(st[0][1]);
+        if (formcounter==htmlCounter){
+            write(htmlController.get(htmlCounter), "<form id=" + '"' + "id" + rand + '"' + "action=" + name +".php"+ '"'+" "+"method="+'"'+"post"+'"'+ ">");
+            formcounter++;
+        }
+
         write(htmlController.get(htmlCounter), "<label>");
         if (ctx.COLOR() != null) {
             in.setColor(ctx.COLOR().toString());
@@ -595,10 +626,10 @@ public class BaseVisitor extends ParserpBaseVisitor {
             in.setTag(ctx.NUAMIN().toString());
             in.setOpenBracket(ctx.OPENP().toString());
             write(htmlController.get(htmlCounter), "Your " + in.getTag() + " </label>" + '\n');
-            write(htmlController.get(htmlCounter), "<input type=" + '"' + "text" + '"');
+            write(htmlController.get(htmlCounter), "<input type=" + '"' + in.getTag() + '"');
             if (ctx.N() != null) {
                 in.setTagText(ctx.N().toString());
-                write(htmlController.get(htmlCounter), "value=" + '"' + in.getTag() + '"');
+                write(htmlController.get(htmlCounter), "value=" + '"' + in.getTagText() + '"');
             }
         }
         in.setCloseBracket(ctx.CLOSEP().toString());
@@ -606,8 +637,11 @@ public class BaseVisitor extends ParserpBaseVisitor {
         if (ctx.bodyIN() != null) {
             in.setBodyIn(visitBodyIN(ctx.bodyIN()));
         }
-        write(htmlController.get(htmlCounter), "</form>");
-        write(htmlController.get(htmlCounter), "<button form=" + '"' + "id" + rand + '"' + ">"+"submit"+"</button>");
+//        if (formcounter==htmlCounter+1){
+//            write(htmlController.get(htmlCounter), "<input type="+"submit" + '"' +" "+  ">"+"submit"+"</input>");
+//            write(htmlController.get(htmlCounter), "</form>");
+//        }
+
         in.setSemiColon(ctx.IN_CLOSE().toString());
         System.out.println(in.getSemiColon());
         return in;

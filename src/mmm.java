@@ -1,5 +1,6 @@
 import Ast.nodes.Page;
 import Ast.vistor.BaseVisitor;
+import Ast.vistor.symbolTable;
 import gen.Lexerp;
 import gen.Parserp;
 import org.antlr.v4.runtime.CharStream;
