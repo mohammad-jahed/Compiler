@@ -1,4 +1,4 @@
-// Generated from D:/compiler/Compiler-5 (1)/Compiler-5/src\Lexerp.g4 by ANTLR 4.10.1
+// Generated from D:/java/finalCompiler/src\Lexerp.g4 by ANTLR 4.10.1
 package gen;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;

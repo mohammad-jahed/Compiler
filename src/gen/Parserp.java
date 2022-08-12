@@ -1,4 +1,4 @@
-// Generated from D:/compiler/Compiler-5 (1)/Compiler-5/src\Parserp.g4 by ANTLR 4.10.1
+// Generated from D:/java/finalCompiler/src\Parserp.g4 by ANTLR 4.10.1
 package gen;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;

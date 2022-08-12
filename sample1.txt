@@ -1,18 +1,20 @@
-page p15{
-in: text(ssss)->val(username,usernameid);
-in: text(mmm)->val(username1,usernameid1);
+page p1{
+out:image(D:\java\finalCompiler\ddd.jpg);
+in:field(name)->val(id,name);
+in:email(nawar@gmail.com)->val(id1,name1);
 }
-controller c1 controls p15{
-$a="mmmm";
-}
-page p25{
-in: text(ssss1)->val(username2,usernameid2);
-in: text(mmm1)->val(username3,usernameid3);
-}
-controller c2 controls p25{
-$a="mmmm2";
-}
+controller c1 controls p1{
+   $colors = array["red","green","blue"];
 
 
+foreach($colors as $color){
+  print ($color);
+  }
+  validation ( request ){
+    name=> string;
+    name=>required;
+    }
+  print (request->name);
+  goto p;
 
-
+}

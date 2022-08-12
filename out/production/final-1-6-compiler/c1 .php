@@ -1,9 +1,0 @@
-<?php
-$a="mmmm";
-?><?php
-$a="mmmm";
-?><?php
-$a="mmmm";
-?><?php
-$a="mmmm";
-?>

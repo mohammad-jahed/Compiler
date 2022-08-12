@@ -50,7 +50,7 @@ public class symbolTable {
 
     public String[][] add() {
         File file = new File(
-                "D:\\compiler final project\\Compiler\\sample1.txt");
+                "sample1.txt");
 
 
         int controller = 1;

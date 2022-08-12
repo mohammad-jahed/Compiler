@@ -23,13 +23,11 @@ public class BaseVisitor extends ParserpBaseVisitor {
     public static int htmlCounter = 0;
     public static int phpCounter = 0;
     public String out1;
-    public  int index;
-    public String name="";
-    public String[][] st=new symbolTable().add();
-    public static int formcounter=0;
-    public static int incounter=0;
-
-
+    public int index;
+    public String name = "";
+    public String[][] st = new symbolTable().add();
+    public static int formcounter = 0;
+    public static int incounter = 0;
 
 
     @Override
@@ -455,8 +453,8 @@ public class BaseVisitor extends ParserpBaseVisitor {
         for (int i = 0; i < ctx.body_page().size(); i++) {
             bodyPages.add(visitBody_page(ctx.body_page(i)));
         }
-        if (incounter!=0){
-            write(htmlController.get(htmlCounter), "<input type="+"submit" + '"' +" "+  ">"+"submit"+"</input>");
+        if (incounter != 0) {
+            write(htmlController.get(htmlCounter), "<input type=" + '"' + "submit" + '"' + ">");
             write(htmlController.get(htmlCounter), "</form>");
         }
         write(htmlController.get(htmlCounter), "</body>" + '\n');
@@ -464,7 +462,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
         System.out.println(definitionPage.getCloseBracket());
         htmlCounter++;
-        incounter=0;
+        incounter = 0;
         return definitionPage;
     }
 
@@ -544,21 +542,21 @@ public class BaseVisitor extends ParserpBaseVisitor {
         System.out.println(in.getInOpen());
         Random random = new Random();
         int rand = random.nextInt();
-        for (int i=0;i<10;i++){
-            if(Objects.equals(st[1][i], htmlController.get(htmlCounter).substring(5, htmlController.get(htmlCounter).length() - 5))){
-                index=i;
+        for (int i = 0; i < 10; i++) {
+            if (Objects.equals(st[1][i], htmlController.get(htmlCounter).substring(5, htmlController.get(htmlCounter).length() - 5))) {
+                index = i;
 //                System.out.println("okkkkkkkkkkkkkkkkkkkkkk");
             }
         }
-            name=st[0][index];
+        name = st[0][index];
 //        System.out.println("herrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
 //        System.out.println(htmlController.get(htmlCounter).substring(5,htmlController.get(htmlCounter).length()-5));
 //        System.out.println(st[1][1]);
 //        System.out.println(index);
 //        System.out.println(name);
 //        System.out.println(st[0][1]);
-        if (formcounter==htmlCounter){
-            write(htmlController.get(htmlCounter), "<form id=" + '"' + "id" + rand + '"' + "action=" + name +".php"+ '"'+" "+"method="+'"'+"post"+'"'+ ">");
+        if (formcounter == htmlCounter) {
+            write(htmlController.get(htmlCounter), "<form id=" + '"' + "id" + rand + '"' + "action=" + name + ".php" + '"' + " " + "method=" + '"' + "post" + '"' + ">");
             formcounter++;
         }
 
@@ -626,7 +624,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
             in.setTag(ctx.NUAMIN().toString());
             in.setOpenBracket(ctx.OPENP().toString());
             write(htmlController.get(htmlCounter), "Your " + in.getTag() + " </label>" + '\n');
-            write(htmlController.get(htmlCounter), "<input type=" + '"' + in.getTag() + '"');
+            write(htmlController.get(htmlCounter), "<input type=" + '"' + "text" + '"');
             if (ctx.N() != null) {
                 in.setTagText(ctx.N().toString());
                 write(htmlController.get(htmlCounter), "value=" + '"' + in.getTagText() + '"');
@@ -742,7 +740,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
 
         arr.setArrayClose(ctx.ARRAY_CLOSE().toString());
         System.out.println(arr.getArrayClose());
-        write(phpController.get(phpCounter), ")");
+        write(phpController.get(phpCounter), ");");
         return arr;
     }
 
@@ -922,6 +920,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         List<GoToBody3> goToBody3s = new ArrayList<>();
         goTo.setGoToBody1(visitGotobody1(ctx.gotobody1()));
         if (ctx.gotobody2() != null) {
+            write(phpController.get(phpCounter),"\n");
             goTo.setGoToBody2(visitGotobody2(ctx.gotobody2()));
             if (ctx.gotobody3() != null) {
                 for (int i = 0; i < ctx.gotobody3().size(); i++) {
@@ -936,6 +935,7 @@ public class BaseVisitor extends ParserpBaseVisitor {
         System.out.println(goTo.getSemiColon());
         return goTo;
     }
+
 
     @Override
     public IFC visitIfc(Parserp.IfcContext ctx) {
@@ -994,10 +994,13 @@ public class BaseVisitor extends ParserpBaseVisitor {
         GoToBody1 goToBody1 = new GoToBody1();
         goToBody1.setGotoOpen(ctx.GOTO_OPEN().toString());
         System.out.println(goToBody1.getGotoOpen());
+        write(phpController.get(phpCounter),"header('");
         goToBody1.setGotoON(ctx.GOTON().toString());
+        write(phpController.get(phpCounter),goToBody1.getGotoON()+".html');");
         System.out.println(goToBody1.getGotoON());
         return goToBody1;
     }
+
 
     @Override
     public GoToBody2 visitGotobody2(Parserp.Gotobody2Context ctx) {
